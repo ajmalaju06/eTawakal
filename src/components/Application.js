@@ -30,6 +30,21 @@ import { RegisterInfo } from './auth/RegisterInfo';
 import { Registration } from './auth/Registration';
 import { Home } from './auth/Home'
 import { CreditInfo } from './shared/CreditInfo';
+import { ApproveConfirm } from './auth/ApproveConfirm';
+import { Approve } from './auth/Approve';
+import { Marchant } from './auth/Marchant';
+import { MobileMoneyDetail } from './auth/MobileMoneyDetail';
+import { MobileMoney } from './auth/MobileMoney';
+import { NearByConfirm } from './auth/NearByConfirm';
+import { NearBy } from './auth/NearBy';
+import { PayMe } from './auth/PayMe';
+import { PaymentConfirm } from './auth/PaymentConfirm';
+import { Payment } from './auth/Payment';
+import { SendFundDetail } from './auth/SendFundDetail';
+import { SendFund } from './auth/SendFund';
+import { TransferConfirm } from './auth/TransferConfirm';
+import { Transfer } from './auth/Transfer';
+import { TransferSuccessfull } from './auth/TransferSuccessfull';
 import Icon from 'react-native-vector-icons/FontAwesome';
 /**
  * @class Application 
@@ -40,7 +55,7 @@ export class Application extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Home />
+                <TransferSuccessfull />
             </View >
         );
     }

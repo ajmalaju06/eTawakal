@@ -22,5 +22,8 @@
 
 export const Images = {
     logo: require('../../resource/eTawakalLogo.png'),
-    captcha: require('../../resource/captcha.jpg')
+    captcha: require('../../resource/captcha.jpg'),
+    person: require('../../resource/person.png'),
+    call: require('../../resource/call.png'),
+    qrCode: require('../../resource/qrCode.png'),
 };
