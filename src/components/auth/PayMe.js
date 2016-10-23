@@ -22,9 +22,10 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
+import { Images } from '../../util/Images';
 import Icon from 'react-native-vector-icons/FontAwesome';
 /**
  * @class PayMe
@@ -38,7 +39,7 @@ export class PayMe extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={Images.background_pattern}>
                 <Header />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
@@ -46,19 +47,19 @@ export class PayMe extends React.Component {
                     <Text style={styles.approveHeadingStyle}>PAY - ME</Text>
                     <View style={styles.listviewContainer}>
                         <View style={{ height: 40, alignItems: 'center', flexDirection: 'row' }}>
-                            <Text style={{ flex: 1, marginLeft: 10, color: 'white' }}>Near By</Text>
-                            <Icon style={styles.iconStyle} name="question-circle" color="#FFF" size={20} />
+                            <Text style={{ flex: 1, marginLeft: 10, color: '#5a5a5a' }}>Near By</Text>
+                            <Icon style={styles.iconStyle} name="question-circle" color="gray" size={20} />
                         </View>
                         <View style={{ height: 40, alignItems: 'center', flexDirection: 'row' }}>
-                            <Text style={{ flex: 1, marginLeft: 10, color: 'white' }}>Far Away</Text>
-                            <Icon style={styles.iconStyle} name="question-circle" color="#FFF" size={20} />
+                            <Text style={{ flex: 1, marginLeft: 10, color: '#5a5a5a' }}>Far Away</Text>
+                            <Icon style={styles.iconStyle} name="question-circle" color="gray" size={20} />
                         </View>
                     </View>
                 </View>
                 <View style={styles.approveButtonContainer} backgroundColor={'#22ab3b'}>
                     <Text style={styles.qrCodeButtonStyle}>OK</Text>
                 </View>
-            </View >
+            </Image >
         );
     }
 }
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
         height: null
     },
     contentContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -84,13 +85,13 @@ const styles = StyleSheet.create({
         height: 1,
         width: 280,
         marginTop: 30,
-        backgroundColor: '#FFF'
+        backgroundColor: 'gray'
     },
     approveHeadingStyle: {
         marginTop: -10,
         borderBottomColor: 'yellow',
         borderBottomWidth: 1,
-        color: '#FFF'
+        color: '#5a5a5a'
     },
     listviewContainer: {
         marginTop: 10,

@@ -22,9 +22,10 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image } from 'react-native';
 import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
+import { Images } from '../../util/Images';
 
 /**
  * @class MobileMoneyDetail
@@ -38,16 +39,16 @@ export class MobileMoneyDetail extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={Images.background_pattern}>
                 <Header />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
                     <View style={styles.lineStyle}></View>
                     <Text style={styles.approveHeadingStyle}>MOBILE MONEY</Text>
                     <View style={styles.listviewContainer}>
-                        <Text style={{ color: 'white', marginTop: 5 }}>User Name</Text>
-                        <Text style={{ color: 'white', marginTop: 5 }}>+9198847935983</Text>
-                        <Text style={{ color: 'white', marginTop: 5 }}>Place Name Country</Text>
+                        <Text style={{ color: '#5a5a5a', marginTop: 5 }}>User Name</Text>
+                        <Text style={{ color: '#5a5a5a', marginTop: 5 }}>+9198847935983</Text>
+                        <Text style={{ color: '#5a5a5a', marginTop: 5 }}>Place Name Country</Text>
                         <View style={{ width: 280, marginTop: 40 }}>
                             <TextInput placeholder="Pupose" style={styles.textInputContainer}></TextInput>
                             <TextInput placeholder="Amount" style={styles.textInputContainer} marginTop={10}></TextInput>
@@ -57,7 +58,7 @@ export class MobileMoneyDetail extends React.Component {
                 <View style={styles.approveButtonContainer} marginLeft={62} backgroundColor={'#22ab3b'}>
                     <Text style={styles.qrCodeButtonStyle}>SEND</Text>
                 </View>
-            </View>
+            </Image>
         );
     }
 }
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
         height: null
     },
     contentContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -83,13 +84,13 @@ const styles = StyleSheet.create({
         height: 1,
         width: 280,
         marginTop: 30,
-        backgroundColor: '#FFF'
+        backgroundColor: 'gray'
     },
     approveHeadingStyle: {
         marginTop: -10,
         borderBottomColor: 'yellow',
         borderBottomWidth: 1,
-        color: '#FFF'
+        color: '#5a5a5a'
     },
     listviewContainer: {
         marginTop: 40,

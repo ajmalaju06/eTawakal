@@ -23,7 +23,7 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Navigator, DrawerLayoutAndroid, TouchableHighlight } from 'react-native';
 import { Header } from './shared/Header';
 import { Login } from './auth/Login';
 import { RegisterInfo } from './auth/RegisterInfo';
@@ -45,28 +45,80 @@ import { SendFund } from './auth/SendFund';
 import { TransferConfirm } from './auth/TransferConfirm';
 import { Transfer } from './auth/Transfer';
 import { TransferSuccessfull } from './auth/TransferSuccessfull';
+import { HomeNew } from './auth/HomeNew';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+var _initialRoute = null;
+var _navigator = null;
+
 /**
  * @class Application 
  * @extends React.Component
  */
 export class Application extends React.Component {
 
+    // render() {
+    //     return (
+    //         <View style={styles.container}>
+    //             <TransferSuccessfull />
+    //         </View >
+    //     );
+    // }
+
+    constructor() {
+        super();
+
+        //configure the initial screen
+        _initialRoute = {
+            component: TransferSuccessfull
+        };
+
+    };
+
+    /**
+      * Process the routes and renders the appropriate component on the screen.
+      *
+      * @param {Object} route
+      * @param {Navigator} navigator
+      * @return {View} application
+      */
+    renderScene(route, navigator) {
+        _navigator = navigator;
+        //Component is the passed component
+        let Component = route.component;
+
+        /**
+         * render the application with the current navigator component
+         */
+        let screenView = (
+
+            <View style={styles.container}>
+                <Component {...route.props} navigator={navigator} />
+            </View>
+        );
+        return screenView;
+    }
+
+    /**
+     * @render
+     * @return {View} container
+     */
     render() {
         return (
-            <View style={styles.container}>
-                <TransferSuccessfull />
-            </View >
+            <Navigator initialRoute={_initialRoute}
+                renderScene={this.renderScene.bind(this)} />
         );
     }
+
 }
+
+
 
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'stretch',
-        backgroundColor: '#F5FCFF',
     },
     menuButtonContainer: {
         width: 250,

@@ -23,67 +23,51 @@
 'use strict';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import { Header } from '../shared/Header';
+import { CreditInfo } from '../shared/CreditInfo';
 import { Images } from '../../util/Images';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
 /**
- * @class eTawakal 
+ * @class HomeNew
  * @extends React.Component
  */
-export class Header extends React.Component {
+export class HomeNew extends React.Component {
 
-    constructor() {
-        super();
-
-        /**
-         * @state
-         */
-        this.state = {};
-    }
     /**
      * @render
      * @return {View} view
      */
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.welcome}>
-                    <View style={{ width: 30, alignItems: 'center', justifyContent: 'center' }}>
-                        <Icon name="bars" color="gray" size={18} />
-                    </View>
-                    <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'center' }}>
-                        <Image source={Images.twkal_exprs_logo} style={{ width: 200, height: 40 }}></Image>
+            <Image style={styles.container} source={Images.background_pattern}>
+                <Header />
+                <CreditInfo />
+                <View style={styles.contentContainer}>
+                    <View style={{ height: 100, backgroundColor: 'red', flexDirection: 'row' }}>
+                        <Text style={{ flex: 1 }}> dhqajkhd </Text>
+                        <Text style={{ flex: 1 }}> dhqajkhd </Text>
                     </View>
                 </View>
-            </View>
+            </Image>
         );
     }
-
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#e7e5e6',
-        borderBottomWidth: .5,
-        borderBottomColor: '#ECECEC',
-        shadowColor: 'black',
-        shadowOpacity: 1.0,
-        shadowOffset: {
-            width: 1,
-            height: 1,
-        },
+        alignItems: 'stretch',
+        backgroundColor: '#F5FCFF',
+        flex: 1,
+        width: null,
+        height: null
     },
-    welcome: {
+    contentContainer: {
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
         marginTop: 20,
-        flexDirection: 'row'
+        marginLeft: 30,
+        marginRight: 30,
+        marginBottom: 20
     },
-    textContainer: {
-        width: 80,
-        fontSize: 15,
-        textAlign: 'center',
-        fontWeight: 'bold',
-        margin: 10,
-        color: '#000'
-    },
-
 });
-

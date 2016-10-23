@@ -58,12 +58,12 @@ export class Marchant extends React.Component {
                             <Text style={styles.listNumberTextStyle}>+91984657567</Text>
                         </View>
                     </View>
-                    <Icon style={styles.iconStyle} name="map-marker" color="#FFF" size={20} />
+                    <Icon style={styles.iconStyle} name="map-marker" color="gray" size={20} />
                 </View>
                 <View style={styles.listLineStyle}></View>
                 <View style={styles.listMailContainer}>
-                    <Icon style={styles.listIconStyle} name="envelope-o" color="#FFF" size={13}></Icon>
-                    <Text style={styles.listMailTextStyle}>marchant@gmail.com</Text>
+                    <Icon style={styles.listIconStyle} name="envelope-o" color="gray" size={13}></Icon>
+                    <Text style={styles.listEmailTextStyle}>marchant@gmail.com</Text>
                     <View style={styles.listChatContainer}>
                         <Icon style={styles.listIconStyle} name="envelope-o" color="#FFF" size={13}></Icon>
                         <Text style={styles.listMailTextStyle}>Chat</Text>
@@ -80,7 +80,7 @@ export class Marchant extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={Images.background_pattern}>
                 <Header />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
@@ -93,7 +93,7 @@ export class Marchant extends React.Component {
                             />
                     </View>
                 </View>
-            </View>
+            </Image>
         );
     }
 }
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         height: null
     },
     contentContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -121,20 +121,20 @@ const styles = StyleSheet.create({
         height: 1,
         width: 280,
         marginTop: 30,
-        backgroundColor: '#FFF'
+        backgroundColor: 'gray'
     },
     approveHeadingStyle: {
         marginTop: -10,
         borderBottomColor: 'yellow',
         borderBottomWidth: 1,
-        color: '#FFF'
+        color: '#5a5a5a'
     },
     listviewContainer: {
         marginTop: 10,
         height: 80,
         flex: 1,
         width: 280,
-        borderColor: 'white',
+        borderColor: 'gray',
         borderWidth: .5
     },
     listMarchantContainer:
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     listMarchantTextStyle: {
         fontSize: 14,
         fontWeight: 'bold',
-        color: 'white'
+        color: 'black'
     },
     listContactContainer: {
         flexDirection: 'row',
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
         height: 18
     },
     listNumberTextStyle: {
-        color: 'white',
+        color: '#5a5a5a',
         marginLeft: 7,
         fontSize: 10
     },
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     listLineStyle: {
-        backgroundColor: 'white',
+        backgroundColor: 'gray',
         marginTop: 5,
         height: 0.5
     },
@@ -183,6 +183,12 @@ const styles = StyleSheet.create({
     },
     listMailTextStyle: {
         color: 'white',
+        marginLeft: 7,
+        flex: 1,
+        fontSize: 10
+    },
+    listEmailTextStyle: {
+        color: '#5a5a5a',
         marginLeft: 7,
         flex: 1,
         fontSize: 10

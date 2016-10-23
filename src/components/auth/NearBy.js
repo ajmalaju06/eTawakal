@@ -23,9 +23,10 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Radio, Option } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Radio, Option, Image } from 'react-native';
 import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
+import { Images } from '../../util/Images';
 
 /**
  * @class NearBy
@@ -39,7 +40,7 @@ export class NearBy extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={Images.background_pattern}>
                 <Header />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
@@ -49,7 +50,7 @@ export class NearBy extends React.Component {
                         <View style={{ marginTop: 10, flexDirection: 'row' }}>
                             <TextInput placeholder="Request for" style={styles.textInputContainer}></TextInput>
                         </View>
-                        <Text style={{ marginTop: 30, color: 'white' }}>Who pays the fee ?</Text>
+                        <Text style={{ marginTop: 30, color: 'black' }}>Who pays the fee ?</Text>
                         <View style={{ marginTop: 20 }}>
                         </View>
                     </View>
@@ -57,7 +58,7 @@ export class NearBy extends React.Component {
                 <View style={styles.approveButtonContainer} backgroundColor={'#22ab3b'}>
                     <Text style={styles.qrCodeButtonStyle}>ASK</Text>
                 </View>
-            </View>
+            </Image>
         );
     }
 }
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
         height: null
     },
     contentContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -83,13 +84,13 @@ const styles = StyleSheet.create({
         height: 1,
         width: 280,
         marginTop: 30,
-        backgroundColor: '#FFF'
+        backgroundColor: 'gray'
     },
     approveHeadingStyle: {
         marginTop: -10,
         borderBottomColor: 'yellow',
         borderBottomWidth: 1,
-        color: '#FFF'
+        color: '#5a5a5a'
     },
     listviewContainer: {
         marginTop: 10,

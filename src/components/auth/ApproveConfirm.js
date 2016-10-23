@@ -39,36 +39,38 @@ export class ApproveConfirm extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={Images.background_pattern}>
                 <Header />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
                     <View style={styles.lineStyle}></View>
                     <Text style={styles.approveHeadingStyle}>APPROVE</Text>
-                    <View style={styles.imageContainer}>
-                        <Image style={styles.imageStyle} source={Images.person}></Image>
-                    </View>
-                    <Text style={styles.usernameStyle}>USER NAME</Text>
-                    <Text style={styles.numberStyle}>+91 5454 54528565</Text>
-                    <View style={styles.detailMainContainer}>
-                        <View style={styles.detailContainer}>
-                            <Text style={styles.detailheadStyle}>Amount</Text>
-                            <Text style={styles.detailValueStyle}>500$</Text>
+                    <View style={styles.listviewContainer}>
+                        <View style={styles.imageContainer}>
+                            <Image style={styles.imageStyle} source={Images.person}></Image>
                         </View>
-                        <View style={styles.detailContainer}>
-                            <Text style={styles.detailheadStyle}>Fee</Text>
-                            <Text style={styles.detailValueStyle}>2$</Text>
-                        </View>
-                        <View style={styles.detailContainer}>
-                            <Text style={styles.detailheadStyle}>Total</Text>
-                            <Text style={styles.detailValueStyle}>502$</Text>
+                        <Text style={styles.usernameStyle}>USER NAME</Text>
+                        <Text style={styles.numberStyle}>+91 5454 54528565</Text>
+                        <View style={styles.detailMainContainer}>
+                            <View style={styles.detailContainer}>
+                                <Text style={styles.detailheadStyle}>Amount</Text>
+                                <Text style={styles.detailValueStyle}>500$</Text>
+                            </View>
+                            <View style={styles.detailContainer}>
+                                <Text style={styles.detailheadStyle}>Fee</Text>
+                                <Text style={styles.detailValueStyle}>2$</Text>
+                            </View>
+                            <View style={styles.detailContainer}>
+                                <Text style={styles.detailheadStyle}>Total</Text>
+                                <Text style={styles.detailValueStyle}>502$</Text>
+                            </View>
                         </View>
                     </View>
                 </View>
                 <View style={styles.approveButtonContainer} marginLeft={62} backgroundColor={'#22ab3b'}>
                     <Text style={{ color: '#FFF', fontSize: 18, fontWeight: 'bold' }}>APPROVE</Text>
                 </View>
-            </View >
+            </Image >
         );
     }
 }
@@ -77,9 +79,12 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'stretch',
         backgroundColor: '#F5FCFF',
+        flex: 1,
+        width: null,
+        height: null
     },
     contentContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -91,13 +96,20 @@ const styles = StyleSheet.create({
         height: 1,
         width: 280,
         marginTop: 30,
-        backgroundColor: '#FFF'
+        backgroundColor: 'gray'
     },
     approveHeadingStyle: {
         marginTop: -10,
         borderBottomColor: 'yellow',
         borderBottomWidth: 1,
-        color: '#FFF'
+        color: '#5a5a5a'
+    },
+    listviewContainer: {
+        marginTop: 10,
+        height: 80,
+        flex: 1,
+        alignItems: 'center',
+        width: 280,
     },
     imageContainer: {
         height: 100,
@@ -105,7 +117,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#FFF',
+        backgroundColor: '#d7d7d7',
         borderRadius: 50
     },
     imageStyle: {
@@ -113,12 +125,12 @@ const styles = StyleSheet.create({
         width: 70
     },
     usernameStyle: {
-        color: 'white',
+        color: '#5a5a5a',
         fontSize: 14,
         marginTop: 10
     },
     numberStyle: {
-        color: 'white',
+        color: '#5a5a5a',
         fontSize: 12,
         marginTop: 10
     },
@@ -135,7 +147,7 @@ const styles = StyleSheet.create({
         marginTop: 15
     },
     detailheadStyle: {
-        color: 'white',
+        color: '#5a5a5a',
         marginLeft: 15,
         flex: 1,
         fontSize: 14
@@ -144,7 +156,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginRight: 15,
         justifyContent: 'flex-end',
-        color: 'white',
+        color: '#5a5a5a',
         fontSize: 13
     },
     approveButtonContainer: {
@@ -152,6 +164,7 @@ const styles = StyleSheet.create({
         height: 45,
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 30
         // shadowColor: 'black',
         // shadowOpacity: .6,
         // shadowOffset: {

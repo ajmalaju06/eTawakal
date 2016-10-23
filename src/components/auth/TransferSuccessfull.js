@@ -39,22 +39,22 @@ export class TransferSuccessfull extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={Images.background_pattern} >
                 <Header />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
                     <View style={styles.listviewContainer}>
                         <View style={styles.imageContainer}>
-                            <Image style={styles.imageStyle} source={Images.qrCode}></Image>
+                            <Image style={styles.imageStyle} source={Images.transaction_status}></Image>
                         </View>
-                        <Text style={{ marginTop: 20, color: 'white', fontSize: 17 }}>Transation</Text>
-                        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 25 }}>Successfull</Text>
+                        <Text style={{ marginTop: 20, color: 'black', fontSize: 17 }}>Transation</Text>
+                        <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 25 }}>Successfull</Text>
                     </View>
                 </View>
                 <View style={styles.approveButtonContainer} backgroundColor={'#22ab3b'}>
                     <Text style={styles.qrCodeButtonStyle}>OK</Text>
                 </View>
-            </View>
+            </Image>
         );
     }
 }
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         height: null
     },
     contentContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     imageStyle: {
         height: 170,
-        width: 170
+        width: 210
     },
     detailMainContainer: {
         marginTop: 40,

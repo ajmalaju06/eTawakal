@@ -22,8 +22,9 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView } from 'react-native';
+import { View, Text, StyleSheet, ListView, Image } from 'react-native';
 import { Header } from '../shared/Header';
+import { Images } from '../../util/Images';
 import { CreditInfo } from '../shared/CreditInfo';
 
 /**
@@ -63,7 +64,7 @@ export class Payment extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={Images.background_pattern}>
                 <Header />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
@@ -77,7 +78,7 @@ export class Payment extends React.Component {
                     </View>
 
                 </View>
-            </View>
+            </Image>
         );
     }
 }
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
         height: null
     },
     contentContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -105,13 +106,13 @@ const styles = StyleSheet.create({
         height: 1,
         width: 280,
         marginTop: 30,
-        backgroundColor: '#FFF'
+        backgroundColor: 'gray'
     },
     approveHeadingStyle: {
         marginTop: -10,
         borderBottomColor: 'yellow',
         borderBottomWidth: 1,
-        color: '#FFF'
+        color: '#5a5a5a'
     },
     approveButtonContainer: {
         width: 250,
@@ -136,16 +137,16 @@ const styles = StyleSheet.create({
         height: 50,
         flex: 1,
         width: 280,
-        borderBottomColor: 'white',
+        borderBottomColor: 'gray',
         borderBottomWidth: 1
     },
     lisviewContentBillTextStyle: {
-        color: 'white',
+        color: '#5a5a5a',
         fontSize: 14,
         marginTop: 10
     },
     listviewContentCompanyTextStyle: {
-        color: 'white',
+        color: '#5a5a5a',
         fontSize: 14
     }
 });

@@ -40,7 +40,7 @@ export class NearByConfirm extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={Images.background_pattern}>
                 <Header />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
@@ -75,7 +75,7 @@ export class NearByConfirm extends React.Component {
                         <Text style={styles.buttonTextStyle}>CHECK BAlANCE</Text>
                     </View>
                 </View>
-            </View>
+            </Image>
         );
     }
 }
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         height: null
     },
     contentContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -101,13 +101,13 @@ const styles = StyleSheet.create({
         height: 1,
         width: 280,
         marginTop: 30,
-        backgroundColor: '#FFF'
+        backgroundColor: 'gray'
     },
     approveHeadingStyle: {
         marginTop: -10,
         borderBottomColor: 'yellow',
         borderBottomWidth: 1,
-        color: '#FFF'
+        color: '#5a5a5a'
     },
     listviewContainer: {
         marginTop: 10,
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         marginTop: 15
     },
     detailheadStyle: {
-        color: 'white',
+        color: '#5a5a5a',
         marginLeft: 15,
         flex: 1,
         fontSize: 14
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginRight: 15,
         justifyContent: 'flex-end',
-        color: 'white',
+        color: '#5a5a5a',
         fontSize: 13
     },
     buttonContainer: {
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     },
     trasactionTextStyle: {
         fontSize: 14,
-        color: 'white',
+        color: '#5a5a5a',
         marginTop: 30
     }
 });

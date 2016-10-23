@@ -22,8 +22,9 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableHighlight, Image } from 'react-native';
 import { Header } from '../shared/Header';
+import { Images } from '../../util/Images';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 /**

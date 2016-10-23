@@ -23,9 +23,10 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView } from 'react-native';
+import { View, Text, StyleSheet, ListView, Image } from 'react-native';
 import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
+import { Images } from '../../util/Images';
 
 /**
  * @class Approve
@@ -39,7 +40,7 @@ export class Approve extends React.Component {
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
             dataSource: ds.cloneWithRows(['row 1', 'row 2', 'row 3', 'row 4', '6', '7', '8', '9', '10'
-                , 'row 1', 'row 2', 'row 3', 'row 4', '6', '7', '8', '9', '10', 'sdf','sdfsfdf', 'sdfsdf']),
+                , 'row 1', 'row 2', 'row 3', 'row 4', '6', '7', '8', '9', '10', 'sdf', 'sdfsfdf', 'sdfsdf']),
         };
     }
 
@@ -49,9 +50,9 @@ export class Approve extends React.Component {
      */
     renderRow(rowData, index) {
         let component = (
-            <View key={index} style={{ marginTop: 20, height: 50, flex: 1, width: 280, borderBottomColor: 'white', borderBottomWidth: 1 }}>
-                <Text style={{ color: 'white', fontSize: 14 }}>USER NAME</Text>
-                <Text style={{ color: 'white', fontSize: 14, marginTop: 10 }}>+91878754866</Text>
+            <View key={index} style={{ marginTop: 20, height: 50, flex: 1, width: 280, borderBottomColor: 'gray', borderBottomWidth: 1 }}>
+                <Text style={{ color: 'black', fontSize: 14 }}>USER NAME</Text>
+                <Text style={{ color: 'black', fontSize: 14, marginTop: 10 }}>+91878754866</Text>
             </View>
         );
         return component;
@@ -63,24 +64,24 @@ export class Approve extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
-            <Header/>
-            <CreditInfo/>
+            <Image style={styles.container} source={Images.background_pattern}>
+                <Header />
+                <CreditInfo />
                 <View style={styles.contentContainer}>
                     <View style={styles.lineStyle}></View>
                     <Text style={styles.approveHeadingStyle}>APPROVE</Text>
-                    <View style={{flex: 1}}>
-                    <ListView
-                        dataSource={this.state.dataSource}
-                        renderRow={this.renderRow.bind(this)}
-                    />
+                    <View style={{ flex: 1 }}>
+                        <ListView
+                            dataSource={this.state.dataSource}
+                            renderRow={this.renderRow.bind(this)}
+                            />
                     </View>
-                    
+
                 </View>
                 <View style={styles.approveButtonContainer} marginLeft={62} backgroundColor={'#22ab3b'}>
                     <Text style={styles.qrCodeButtonStyle}>SCAN QR CODE</Text>
                 </View>
-            </View>
+            </Image>
         );
     }
 }
@@ -94,33 +95,33 @@ const styles = StyleSheet.create({
         height: null
     },
     contentContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 20,
         marginLeft: 30,
         marginRight: 30,
-        
+
     },
     lineStyle: {
         height: 1,
         width: 280,
         marginTop: 30,
-        backgroundColor: '#FFF'
+        backgroundColor: 'gray'
     },
     approveHeadingStyle: {
         marginTop: -10,
         borderBottomColor: 'yellow',
         borderBottomWidth: 1,
-        color: '#FFF'
+        color: 'black'
     },
     approveButtonContainer: {
         width: 250,
         height: 45,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom:35
+        marginBottom: 35
         // shadowColor: 'black',
         // shadowOpacity: .6,
         // shadowOffset: {
@@ -128,9 +129,9 @@ const styles = StyleSheet.create({
         // height: .5,
         // },
     },
-    qrCodeButtonStyle:{
+    qrCodeButtonStyle: {
         color: '#FFF',
-        fontSize: 18, 
-        fontWeight: 'bold' 
+        fontSize: 18,
+        fontWeight: 'bold'
     }
 });

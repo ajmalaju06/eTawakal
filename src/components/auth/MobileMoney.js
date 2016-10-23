@@ -22,9 +22,10 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView } from 'react-native';
+import { View, Text, StyleSheet, ListView, Image } from 'react-native';
 import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
+import { Images } from '../../util/Images';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 /**
@@ -50,8 +51,8 @@ export class MobileMoney extends React.Component {
         let component = (
             <View key={index} style={styles.listviewContainer}>
                 <View style={{ height: 40, }}>
-                    <Text style={{ color: 'white' }}>USER NAME</Text>
-                    <Text style={{ color: 'white' }}>+91745649487   </Text>
+                    <Text style={{ color: '#5a5a5a' }}>USER NAME</Text>
+                    <Text style={{ color: '#5a5a5a' }}>+91745649487   </Text>
                 </View>
             </View >
         );
@@ -64,7 +65,7 @@ export class MobileMoney extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={Images.background_pattern}>
                 <Header />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
@@ -82,7 +83,7 @@ export class MobileMoney extends React.Component {
                         <Icon name="plus" color="#FFF" size={20} />
                     </View>
                 </View>
-            </View >
+            </Image >
         );
     }
 }
@@ -90,13 +91,12 @@ export class MobileMoney extends React.Component {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'stretch',
-        backgroundColor: '#F5FCFF',
         flex: 1,
         width: null,
         height: null
     },
     contentContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -109,19 +109,19 @@ const styles = StyleSheet.create({
         height: 1,
         width: 280,
         marginTop: 30,
-        backgroundColor: '#FFF'
+        backgroundColor: 'gray'
     },
     approveHeadingStyle: {
         marginTop: -10,
         borderBottomColor: 'yellow',
         borderBottomWidth: 1,
-        color: '#FFF'
+        color: '#5a5a5a'
     },
     listviewContainer: {
         marginTop: 10,
         height: 45,
         flex: 1,
-        borderBottomColor: 'white',
+        borderBottomColor: 'gray',
         borderBottomWidth: 0.5,
         width: 280,
     },

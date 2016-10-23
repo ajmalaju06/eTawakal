@@ -22,9 +22,10 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
+import { Images } from '../../util/Images';
 
 /**
  * @class Home
@@ -38,7 +39,7 @@ export class Home extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={Images.background_pattern}>
                 <Header />
                 <CreditInfo />
 
@@ -65,7 +66,7 @@ export class Home extends React.Component {
                         <Text style={{ color: '#FFF', fontWeight: 'bold' }}>FIND MERCHANT</Text>
                     </View>
                 </View>
-            </View>
+            </Image>
         );
     }
 }
@@ -75,9 +76,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'stretch',
         backgroundColor: '#F5FCFF',
+        width: null,
+        height: null
     },
     menuContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',

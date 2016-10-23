@@ -26,4 +26,7 @@ export const Images = {
     person: require('../../resource/person.png'),
     call: require('../../resource/call.png'),
     qrCode: require('../../resource/qrCode.png'),
+    background_pattern: require('../../resource/background_pattern.jpg'),
+    transaction_status: require('../../resource/transaction_status.png'),
+    twkal_exprs_logo: require('../../resource/twkal_exprs_logo.png'),
 };
