@@ -22,16 +22,15 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Image } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { Header } from '../shared/Header';
-import { CreditInfo } from '../shared/CreditInfo';
 import { Images } from '../../util/Images';
 
 /**
- * @class MobileMoneyDetail
+ * @class NewDeviceFound
  * @extends React.Component
  */
-export class MobileMoneyDetail extends React.Component {
+export class NewDeviceFound extends React.Component {
 
     /**
      * @render
@@ -41,22 +40,16 @@ export class MobileMoneyDetail extends React.Component {
         return (
             <Image style={styles.container} source={Images.background_pattern}>
                 <Header />
-                <CreditInfo />
                 <View style={styles.contentContainer}>
-                    <View style={styles.lineStyle}></View>
-                    <Text style={styles.approveHeadingStyle}>MOBILE MONEY</Text>
-                    <View style={styles.listviewContainer}>
-                        <Text style={styles.detailTextStyle}>User Name</Text>
-                        <Text style={styles.detailTextStyle}>+9198847935983</Text>
-                        <Text style={styles.detailTextStyle}>Place Name Country</Text>
-                        <View style={styles.textInputStyle}>
-                            <TextInput placeholder="Pupose" style={styles.textInputContainer}></TextInput>
-                            <TextInput placeholder="Amount" style={styles.textInputContainer} marginTop={10}></TextInput>
-                        </View>
+                    <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={styles.lineStyle}></View>
+                        <Text style={styles.approveHeadingStyle}>NEAR BY</Text>
                     </View>
-                </View>
-                <View style={styles.approveButtonContainer} marginLeft={62} backgroundColor={'#22ab3b'}>
-                    <Text style={styles.qrCodeButtonStyle}>SEND</Text>
+                    <View style={styles.listviewContainer}>
+                        <Text>{'This not your registered device. You may either use this device for your momentary '
+                            + 'needs or make this device as your permenent device by registering and replacing '
+                            + 'your existing device information with this device information'}</Text>
+                    </View>
                 </View>
             </Image>
         );
@@ -72,65 +65,32 @@ const styles = StyleSheet.create({
         height: null
     },
     contentContainer: {
-        backgroundColor: 'white',
         flex: 1,
+        backgroundColor: 'yellow',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20,
+        marginTop: 30,
         marginLeft: 30,
         marginRight: 30,
+        marginBottom: 30
     },
     lineStyle: {
         height: 1,
-        width: 280,
-        marginTop: 30,
+        width: 300,
         backgroundColor: 'gray'
     },
     approveHeadingStyle: {
         marginTop: -10,
-        borderBottomColor: 'yellow',
         borderBottomWidth: 1,
         color: '#5a5a5a'
     },
     listviewContainer: {
-        marginTop: 40,
+        marginTop: 10,
         height: 80,
         flex: 1,
-        alignItems: 'center',
-        width: 280,
-    },
-    approveButtonContainer: {
-        width: 250,
-        height: 45,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 35
-        // shadowColor: 'black',
-        // shadowOpacity: .6,
-        // shadowOffset: {
-        // width: .5,
-        // height: .5,
-        // },
+        width: 300,
     },
-    qrCodeButtonStyle: {
-        color: '#FFF',
-        fontSize: 18,
-        fontWeight: 'bold'
-    },
-    textInputContainer: {
-        height: 40,
-        borderColor: '#ECECEC',
-        borderWidth: 1,
-        paddingLeft: 10,
-        fontSize: 15,
-        flex: 1
-    },
-    detailTextStyle: {
-        color: '#5a5a5a',
-        marginTop: 5
-    },
-    textInputStyle: {
-        width: 280,
-        marginTop: 40
-    }
+
 });

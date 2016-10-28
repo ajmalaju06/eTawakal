@@ -50,9 +50,9 @@ export class Approve extends React.Component {
      */
     renderRow(rowData, index) {
         let component = (
-            <View key={index} style={{ marginTop: 20, height: 50, flex: 1, width: 280, borderBottomColor: 'gray', borderBottomWidth: 1 }}>
-                <Text style={{ color: 'black', fontSize: 14 }}>USER NAME</Text>
-                <Text style={{ color: 'black', fontSize: 14, marginTop: 10 }}>+91878754866</Text>
+            <View key={index} style={styles.listviewConainer}>
+                <Text style={styles.listviewUsernameTextStyle}>USER NAME</Text>
+                <Text style={styles.listviewUsernameTextStyle} marginTop={10}>+91878754866</Text>
             </View>
         );
         return component;
@@ -108,13 +108,13 @@ const styles = StyleSheet.create({
         height: 1,
         width: 280,
         marginTop: 30,
-        backgroundColor: 'gray'
+        backgroundColor: '#555555'
     },
     approveHeadingStyle: {
         marginTop: -10,
         borderBottomColor: 'yellow',
         borderBottomWidth: 1,
-        color: 'black'
+        color: '#5a5a5a'
     },
     approveButtonContainer: {
         width: 250,
@@ -133,5 +133,17 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 18,
         fontWeight: 'bold'
+    },
+    listviewConainer: {
+        marginTop: 10,
+        height: 50,
+        flex: 1,
+        width: 280,
+        borderBottomColor: '#d7d7d7',
+        borderBottomWidth: 1
+    },
+    listviewUsernameTextStyle: {
+        color: '#555555',
+        fontSize: 14
     }
 });

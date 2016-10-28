@@ -46,6 +46,7 @@ import { TransferConfirm } from './auth/TransferConfirm';
 import { Transfer } from './auth/Transfer';
 import { TransferSuccessfull } from './auth/TransferSuccessfull';
 import { HomeNew } from './auth/HomeNew';
+import { NewDeviceFound } from './auth/NewDeviceFound';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 var _initialRoute = null;
@@ -70,9 +71,8 @@ export class Application extends React.Component {
 
         //configure the initial screen
         _initialRoute = {
-            component: TransferSuccessfull
+            component: NewDeviceFound
         };
-
     };
 
     /**

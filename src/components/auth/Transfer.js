@@ -46,16 +46,16 @@ export class Transfer extends React.Component {
                     <View style={styles.lineStyle}></View>
                     <Text style={styles.approveHeadingStyle}>NEAR BY</Text>
                     <View style={styles.listviewContainer}>
-                        <View style={{ marginTop: 10, flexDirection: 'row' }}>
+                        <View style={styles.textInputDetailContainer}>
                             <TextInput placeholder="Benificiery number" style={styles.textInputContainer}></TextInput>
                         </View>
-                        <View style={{ marginTop: 10, flexDirection: 'row' }}>
+                        <View style={styles.textInputDetailContainer}>
                             <TextInput placeholder="Amount" style={styles.textInputContainer}></TextInput>
                         </View>
-                        <View style={{ marginTop: 10, flexDirection: 'row' }}>
+                        <View style={styles.textInputDetailContainer}>
                             <TextInput placeholder="Message" style={styles.textInputContainer}></TextInput>
                         </View>
-                        <Text style={{ marginTop: 30, color: 'black' }}>Who pays the fee ?</Text>
+                        <Text style={styles.whoPaysTextTyle}>Who pays the fee ?</Text>
                         <View style={{ marginTop: 20 }}>
                         </View>
                     </View>
@@ -63,7 +63,7 @@ export class Transfer extends React.Component {
                 <View style={styles.approveButtonContainer} backgroundColor={'#22ab3b'}>
                     <Text style={styles.qrCodeButtonStyle}>SEND</Text>
                 </View>
-            </Image>
+            </Image >
         );
     }
 }
@@ -130,5 +130,13 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 18,
         fontWeight: 'bold'
+    },
+    textInputDetailContainer: {
+        marginTop: 10,
+        flexDirection: 'row'
+    },
+    whoPaysTextTyle: {
+        marginTop: 10,
+        flexDirection: 'row'
     }
 });

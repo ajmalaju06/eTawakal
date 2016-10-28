@@ -51,8 +51,8 @@ export class MobileMoney extends React.Component {
         let component = (
             <View key={index} style={styles.listviewContainer}>
                 <View style={{ height: 40, }}>
-                    <Text style={{ color: '#5a5a5a' }}>USER NAME</Text>
-                    <Text style={{ color: '#5a5a5a' }}>+91745649487   </Text>
+                    <Text style={styles.listviewTextStyle}>USER NAME</Text>
+                    <Text style={styles.listviewTextStyle}>+91745649487   </Text>
                 </View>
             </View >
         );
@@ -153,5 +153,8 @@ const styles = StyleSheet.create({
             width: .5,
             height: .5,
         }
+    },
+    listviewTextStyle: {
+        color: '#5a5a5a'
     }
 });

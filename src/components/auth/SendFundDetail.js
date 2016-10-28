@@ -46,10 +46,10 @@ export class SendFundDetail extends React.Component {
                     <View style={styles.lineStyle}></View>
                     <Text style={styles.approveHeadingStyle}>SEND FUND</Text>
                     <View style={styles.listviewContainer}>
-                        <Text style={{ color: '#5a5a5a', marginTop: 5 }}>User Name</Text>
-                        <Text style={{ color: '#5a5a5a', marginTop: 5 }}>+9198847935983</Text>
-                        <Text style={{ color: '#5a5a5a', marginTop: 5 }}>Place Name Country</Text>
-                        <View style={{ width: 280, marginTop: 40 }}>
+                        <Text style={styles.detailsTextStyle}>User Name</Text>
+                        <Text style={styles.detailsTextStyle}>+9198847935983</Text>
+                        <Text style={styles.detailsTextStyle}>Place Name Country</Text>
+                        <View style={styles.textInputDetailsContainer}>
                             <TextInput placeholder="Pupose" style={styles.textInputContainer}></TextInput>
                             <TextInput placeholder="Amount" style={styles.textInputContainer} marginTop={10}></TextInput>
                         </View>
@@ -125,4 +125,12 @@ const styles = StyleSheet.create({
         fontSize: 15,
         flex: 1
     },
+    detailsTextStyle: {
+        color: '#5a5a5a',
+        marginTop: 5
+    },
+    textInputDetailsContainer: {
+        width: 280,
+        marginTop: 40
+    }
 });

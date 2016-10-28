@@ -68,7 +68,7 @@ export class PaymentConfirm extends React.Component {
                     </View>
                 </View>
                 <View style={styles.approveButtonContainer} marginLeft={62} backgroundColor={'#22ab3b'}>
-                    <Text style={{ color: '#FFF', fontSize: 18, fontWeight: 'bold' }}>APPROVE</Text>
+                    <Text style={styles.approveButtonTextStyle}>APPROVE</Text>
                 </View>
             </Image >
         );
@@ -172,4 +172,9 @@ const styles = StyleSheet.create({
         // height: .5,
         // },
     },
+    approveButtonTextStyle: {
+        color: '#FFF',
+        fontSize: 18,
+        fontWeight: 'bold'
+    }
 });

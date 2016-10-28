@@ -46,12 +46,12 @@ export class PayMe extends React.Component {
                     <View style={styles.lineStyle}></View>
                     <Text style={styles.approveHeadingStyle}>PAY - ME</Text>
                     <View style={styles.listviewContainer}>
-                        <View style={{ height: 40, alignItems: 'center', flexDirection: 'row' }}>
-                            <Text style={{ flex: 1, marginLeft: 10, color: '#5a5a5a' }}>Near By</Text>
+                        <View style={styles.detailContainer}>
+                            <Text style={styles.detailTextStyle}>Near By</Text>
                             <Icon style={styles.iconStyle} name="question-circle" color="gray" size={20} />
                         </View>
-                        <View style={{ height: 40, alignItems: 'center', flexDirection: 'row' }}>
-                            <Text style={{ flex: 1, marginLeft: 10, color: '#5a5a5a' }}>Far Away</Text>
+                        <View style={styles.detailContainer}>
+                            <Text style={styles.detailTextStyle}>Far Away</Text>
                             <Icon style={styles.iconStyle} name="question-circle" color="gray" size={20} />
                         </View>
                     </View>
@@ -121,5 +121,15 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 18,
         fontWeight: 'bold'
+    },
+    detailContainer: {
+        height: 40,
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    detailTextStyle: {
+        flex: 1,
+        marginLeft: 10,
+        color: '#5a5a5a'
     }
 });

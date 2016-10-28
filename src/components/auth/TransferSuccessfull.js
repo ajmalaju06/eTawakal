@@ -47,8 +47,8 @@ export class TransferSuccessfull extends React.Component {
                         <View style={styles.imageContainer}>
                             <Image style={styles.imageStyle} source={Images.transaction_status}></Image>
                         </View>
-                        <Text style={{ marginTop: 20, color: 'black', fontSize: 17 }}>Transation</Text>
-                        <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 25 }}>Successfull</Text>
+                        <Text style={styles.transationTextStyle}>Transation</Text>
+                        <Text style={styles.successfullTextStyle}>Successfull</Text>
                     </View>
                 </View>
                 <View style={styles.approveButtonContainer} backgroundColor={'#22ab3b'}>
@@ -137,5 +137,15 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 18,
         fontWeight: 'bold'
+    },
+    transationTextStyle: {
+        marginTop: 20,
+        color: 'black',
+        fontSize: 17
+    },
+    successfullTextStyle: {
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 25
     }
 });

@@ -47,10 +47,10 @@ export class NearBy extends React.Component {
                     <View style={styles.lineStyle}></View>
                     <Text style={styles.approveHeadingStyle}>NEAR BY</Text>
                     <View style={styles.listviewContainer}>
-                        <View style={{ marginTop: 10, flexDirection: 'row' }}>
+                        <View style={styles.textInputStyle}>
                             <TextInput placeholder="Request for" style={styles.textInputContainer}></TextInput>
                         </View>
-                        <Text style={{ marginTop: 30, color: 'black' }}>Who pays the fee ?</Text>
+                        <Text style={styles.whoPaysTextStyle}>Who pays the fee ?</Text>
                         <View style={{ marginTop: 20 }}>
                         </View>
                     </View>
@@ -125,5 +125,13 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 18,
         fontWeight: 'bold'
+    },
+    textInputStyle: {
+        marginTop: 10,
+        flexDirection: 'row'
+    },
+    whoPaysTextStyle: {
+        marginTop: 30,
+        color: 'black'
     }
 });

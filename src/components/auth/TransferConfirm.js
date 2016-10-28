@@ -88,7 +88,7 @@ export class TransferConfirm extends React.Component {
                 </View>
                 <TouchableOpacity onPress={this.onNextPage.bind(this)}>
                     <View style={styles.approveButtonContainer} marginLeft={62} backgroundColor={'#22ab3b'}>
-                        <Text style={{ color: '#FFF', fontSize: 18, fontWeight: 'bold' }}>CONFIRM</Text>
+                        <Text style={styles.confirmButtonTextSyle}>CONFIRM</Text>
                     </View>
                 </TouchableOpacity>
             </Image>
@@ -193,4 +193,9 @@ const styles = StyleSheet.create({
         // height: .5,
         // },
     },
+    confirmButtonTextSyle: {
+        color: '#FFF',
+        fontSize: 18,
+        fontWeight: 'bold'
+    }
 });

@@ -43,12 +43,42 @@ export class HomeNew extends React.Component {
                 <Header />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
-                    <View style={{ height: 100, backgroundColor: 'red', flexDirection: 'row' }}>
-                        <Text style={{ flex: 1 }}> dhqajkhd </Text>
-                        <Text style={{ flex: 1 }}> dhqajkhd </Text>
+                    <View style={styles.menuContainer} marginTop={40}>
+                        <View style={styles.tile}>
+                            <Image source={Images.ic_transfer} />
+                            <Text style={styles.tileText}> Transfer</Text>
+                        </View>
+                        <View style={styles.tile}>
+                            <Image source={Images.ic_payme} />
+                            <Text style={styles.tileText}> Pay - Me</Text>
+                        </View>
+                    </View>
+                    <View style={styles.menuContainer}>
+                        <View style={styles.tile}>
+                            <Image source={Images.ic_payment} />
+                            <Text style={styles.tileText}> Payment</Text>
+                        </View>
+                        <View style={styles.tile}>
+                            <Image source={Images.ic_approve} />
+                            <Text style={styles.tileText}> Approve</Text>
+                        </View>
+                    </View>
+                    <View style={styles.menuContainer}>
+                        <View style={styles.tile}>
+                            <Image source={Images.ic_send_fund} />
+                            <Text style={styles.tileText}> Send Fund</Text>
+                        </View>
+                        <View style={styles.tile}>
+                            <Image source={Images.ic_mobile_money} />
+                            <Text style={styles.tileText}> Mobile Money</Text>
+                        </View>
+                    </View>
+                    <View style={styles.lastMenuContainer}>
+                        <Image source={Images.ic_find_merchant} />
+                        <Text style={styles.tileText}> Find Merchant</Text>
                     </View>
                 </View>
-            </Image>
+            </Image >
         );
     }
 }
@@ -70,4 +100,35 @@ const styles = StyleSheet.create({
         marginRight: 30,
         marginBottom: 20
     },
+    tileText: {
+        color: '#464646',
+        fontSize: 16,
+        fontWeight: 'bold'
+    },
+    tile: {
+        height: 80,
+        margin: 5,
+        borderColor: '#bababa',
+        borderWidth: 1,
+        borderRadius: 3,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    menuContainer: {
+        marginLeft: 10,
+        marginRight: 10,
+        flexDirection: 'row'
+    },
+    lastMenuContainer: {
+        width: 140,
+        height: 80,
+        margin: 5,
+        borderColor: '#bababa',
+        borderWidth: 1,
+        borderRadius: 3,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
 });
