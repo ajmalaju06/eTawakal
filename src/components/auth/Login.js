@@ -23,43 +23,75 @@
 'use strict';
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableHighlight, Image } from 'react-native';
-import { Header } from '../shared/Header';
-import { Images } from '../../util/Images';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { Header } from '../shared/Header';
+import { Images } from '../../util/Images';
+import { AppStore } from '../../stores/AppStore';
+import { Registration } from './Registration';
 /**
  * @class Login
  * @extends React.Component
  */
 export class Login extends React.Component {
 
-    /**
-     * @render
-     * @return {View} view
-     */
+    constructor() {
+        super();
+
+        this.state = {
+            username: null,
+            password: null,
+            isAuthenticating: false,
+            hasError: false,
+            errorMessage: null
+        };
+    }
+
+    onRegister() {
+        this.props.navigator.push({ component: Registration });
+
+
+        AppStore.getCountryLust().then(response => { })
+    }
+
+    onLogin() {
+        AppStore.partnerLogin().then(response => {
+            if (response.Result)
+                this.props.navigator.push({ component: Registration });
+        });
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <Header />
                 <View style={styles.loginContainer}>
-                    <TextInput placeholder="Username" style={styles.textInputContainer}></TextInput>
-                    <TextInput placeholder="PassWord" style={styles.textInputContainer} marginTop={25}></TextInput>
-                    <TouchableHighlight>
+                    <TextInput placeholder="Username"
+                        onChangeText={text => this.setState({ username: text })}
+                        value={this.state.username}
+                        style={styles.textInputContainer}></TextInput>
+                    <TextInput placeholder="PassWord"
+                        onChangeText={text => this.setState({ password: text })}
+                        value={this.state.password}
+                        style={styles.textInputContainer} marginTop={25}></TextInput>
+                    <TouchableHighlight onPress={this.onLogin.bind(this)}>
                         <View style={styles.loginButtonContainer}>
-                            <Text style={styles.buttonStyle}> Login</Text>
+                            <Text style={styles.buttonStyle}>Login{this.state.username}</Text>
                         </View>
                     </TouchableHighlight>
                     <Text style={styles.forgotPasswordTextStyle}>Forgot password ?</Text>
                 </View>
-                <View style={styles.registerContainer}>
-                    <Text style={styles.registerAccountTextStyle}>
-                        Register New Account
+                <TouchableHighlight onPress={this.onRegister.bind(this)}>
+                    <View style={styles.registerContainer}>
+                        <Text style={styles.registerAccountTextStyle}>
+                            Register New Account
           			</Text>
-                    <View style={styles.iconContainer}>
-                        <Icon name="plus" color="#FFF" size={15} />
+                        <View style={styles.iconContainer}>
+                            <Icon name="plus" color="#FFF" size={15} />
+                        </View>
                     </View>
-                </View>
-            </View >
+                </TouchableHighlight>
+            </View>
         );
     }
 }

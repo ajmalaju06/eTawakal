@@ -16,8 +16,7 @@
  * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
- * @author Ajmal<ajmalaju06@gmail.com>
+ *
  */
 'use strict';
 
@@ -37,37 +36,59 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
 
     transactionCode: '',
 
-    partnerLogin: function (callback) {
+    deviceCode: '7uTOEBSz3pFGrEz6vsgiE6Odt6PbooWs',
+
+    userName: 'N67a2TEuY68gnqZfuayeVg==',
+
+    password: 't1h6/ATZ26WqXugQ+DJs4g==',
+
+    partnerLogin: function () {
         let param = {
             ServiceUsersBE: {
-                UserName: '',
-                Password: '',
-                DeviceCode: ''
+                UserName: 'N67a2TEuY68gnqZfuayeVg==',
+                Password: 't1h6/ATZ26WqXugQ+DJs4g==',
+                DeviceCode: '7uTOEBSz3pFGrEz6vsgiE6Odt6PbooWs'
             }
         };
-        return RequestManager.get('commonServices.svc/PartnerLogin', param).then(response => {
-            this.transactionCode = response.transactionCode;
-            this.saveTransactionCode(this.transactionCode);
-            callback(response)
+        return RequestManager.post('partnerService.svc/PartnerLogin', param).then(response => {
+            if (response.Result) {
+                let loginInfo = {
+                    transactionCode: response.ServiceUsersBE.TransactionCode,
+                    serviceApiUrl: response.ServiceUsersBE.ServiceAPIUrl,
+                    statusCode: response.StatusCode,
+                    statusDescription: response.StatusDescription
+                };
+                this.transactionCode = loginInfo.transactionCode;
+                this.syncLoginInfo(loginInfo)
+            }
+            return response;
         });
     },
 
-    saveTransactionCode: function (transactionCode) {
-        let key = '@Etawakal:transactionCode';
-        AsyncStorage.setItem(key, transactionCode);
+    getCountryList: function () {
+        let transactionCode = null;
+        if (this.transactionCode != '') {
+            transactionCode = this.transactionCode;
+        }
+
+        return RequestManager.post('commonServices.svc/GetCountryList', {
+            ServiceUsersBE: {
+                UserName: this.userName,
+                Password: this.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            }
+        });
+    },
+
+    syncLoginInfo: function (loginInfo) {
+        let key = '@Etawakal:loginInfo';
+        AsyncStorage.setItem(key, JSON.stringify(loginInfo));
+    },
+
+    getLoginInfo: function () {
+        let key = '@Etawakal:loginInfo';
+        return AsyncStorage.getItem(key).then(data => JSON.parse(data || '{}'));
     }
 
 });
-
-
-
-
-
-// {
-//     ServiceUsersBE: {
-//         UserName: ''
-//     },
-//     MobileUSer: {
-//         UserName: 
-//     }
-// }

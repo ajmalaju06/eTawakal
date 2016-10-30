@@ -23,7 +23,15 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Navigator, DrawerLayoutAndroid, TouchableHighlight } from 'react-native';
+import {
+    StyleSheet, Text, TextInput, View, Navigator,
+    DrawerLayoutAndroid, TouchableHighlight
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { AppStore } from '../stores/AppStore';
+import { NavigationStore } from '../stores/NavigationStore';
+
 import { Header } from './shared/Header';
 import { Login } from './auth/Login';
 import { RegisterInfo } from './auth/RegisterInfo';
@@ -47,7 +55,7 @@ import { Transfer } from './auth/Transfer';
 import { TransferSuccessfull } from './auth/TransferSuccessfull';
 import { HomeNew } from './auth/HomeNew';
 import { NewDeviceFound } from './auth/NewDeviceFound';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 var _initialRoute = null;
 var _navigator = null;
@@ -58,22 +66,19 @@ var _navigator = null;
  */
 export class Application extends React.Component {
 
-    // render() {
-    //     return (
-    //         <View style={styles.container}>
-    //             <TransferSuccessfull />
-    //         </View >
-    //     );
-    // }
-
     constructor() {
         super();
 
-        //configure the initial screen
         _initialRoute = {
-            component: NewDeviceFound
+            component: Login
         };
+
+        this.state = {};
     };
+
+    componentDidMount() {
+        NavigationStore.setNavigator(this.refs.navigator);
+    }
 
     /**
       * Process the routes and renders the appropriate component on the screen.
@@ -91,7 +96,6 @@ export class Application extends React.Component {
          * render the application with the current navigator component
          */
         let screenView = (
-
             <View style={styles.container}>
                 <Component {...route.props} navigator={navigator} />
             </View>
@@ -105,7 +109,7 @@ export class Application extends React.Component {
      */
     render() {
         return (
-            <Navigator initialRoute={_initialRoute}
+            <Navigator ref="navigator" initialRoute={_initialRoute}
                 renderScene={this.renderScene.bind(this)} />
         );
     }
