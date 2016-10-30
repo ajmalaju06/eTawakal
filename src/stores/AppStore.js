@@ -92,7 +92,7 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
                 Mobile: user.mobile, CountryId: user.countryId,
                 UserTypeId: user.userTypeId
             }
-        }:
+        };
         return RequestManager
             .post('userServices.svc/CreateUserAccount', userObject);
     },

@@ -20,12 +20,16 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image, Picker,TouchableOpacity } from 'react-native';
 import { Header } from '../shared/Header';
 import { Images } from '../../util/Images';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import { AppStore } from '../../stores/AppStore';
+
+const Item = Picker.Item;
+
+
 /**
  * @class Registration
  * @extends React.Component
@@ -41,7 +45,8 @@ export class Registration extends React.Component {
         this.state = {
             isValid: true,
             user: {},
-            isSubmitting: false
+            isSubmitting: false,
+            countryList: []
         };
     }
 
@@ -50,6 +55,9 @@ export class Registration extends React.Component {
         let valid = true;
         if (this.state.user.userName == '') valid = false;
         if (this.state.user.password == '') valid = false;
+        if (this.state.user.phoneNumber == '') valid = false;
+        if (this.state.user.confirmPassWord == '') valid  = false;
+        if (this.state.user.captcha == '') valid = false;
         if (valid) {
             this.setState({ isSubmitting: true })
             AppStore.registerUser(this.state.user).then(response => {
@@ -69,6 +77,31 @@ export class Registration extends React.Component {
         this.setState({ user: state });
     }
 
+    componentDidMount() {
+        AppStore.getCountryList().then(response => {
+            if (response.Result) {
+                let country = [
+                    { countryId: 1, name: 'India' },
+                    { countryId: 2, name: 'United Arab Emirates' }
+                ];
+                this.setState({ countryList: country });
+            }
+        });
+    }
+
+    renderCountryList() {
+        return (
+            <Picker
+                style={[styles.picker, { color: 'white', backgroundColor: '#333' }]}
+                selectedValue={this.state.color}
+                mode="dropdown">
+                <Item label="red" color="red" value="red" />
+                <Item label="green" color="green" value="green" />
+                <Item label="blue" color="blue" value="blue" />
+            </Picker>
+        );
+    }
+
     renderSubmitBtn() {
         if (this.state.isSubmitting) {
             return (
@@ -80,13 +113,16 @@ export class Registration extends React.Component {
             );
         }
         return (
-            <View style={styles.continueButtonContainer}>
-                <Text style={styles.buttonStyle}>
-                    Submit
-                </Text>
-            </View>
+            <TouchableOpacity onpress={this.onRegisterUser.bind(this)}>
+                <View style={styles.continueButtonContainer} >
+                    <Text style={styles.buttonStyle}>
+                        Submit
+                    </Text>
+                </View>
+            </TouchableOpacity>
         );
     }
+
 
     /**
      * @render
@@ -97,25 +133,28 @@ export class Registration extends React.Component {
             <View style={styles.container}>
                 <Header />
                 <View style={{ marginTop: 10, flex: 1 }}>
-                    <TextInput placeholder="Place"
-                        readOnly={this.state.isSubmitting}
-                        value={this.state.user.place}
-                        onChangeText={text => this.onChangeUser(text, 'place')}
-                        style={styles.textInputContainer}></TextInput>
+                    <TextInput placeholder="Place" style={styles.textInputContainer} marginTop={10}></TextInput>
                     <View style={styles.phoneNumberContainer}>
                         <TextInput placeholder="971" style={styles.contryCodeTextInput}></TextInput>
-                        <TextInput placeholder="Phone number" style={styles.phoneNumberTextInput}></TextInput>
+                        <TextInput placeholder="Phone number"
+                            onChangeText={text => this.onChangeUser(text, 'phoneNumber')} 
+                            style={styles.phoneNumberTextInput}></TextInput>
                     </View>
                     <TextInput placeholder="User Name"
                         onChangeText={text => this.onChangeUser(text, 'userName')}
                         style={styles.textInputContainer} marginTop={10}></TextInput>
-                    <TextInput placeholder="Password" style={styles.textInputContainer} marginTop={10}></TextInput>
-                    <TextInput placeholder="Confirm password" style={styles.textInputContainer} marginTop={10}></TextInput>
+                    <TextInput placeholder="Password" 
+                        onChangeText={text => this.onChangeUser(text,'passWord')} 
+                        style={styles.textInputContainer} marginTop={10}></TextInput>
+                    <TextInput placeholder="Confirm password"
+                        onChangeText={text => this.onChangeUser(text,'confirmPassWord')}
+                        style={styles.textInputContainer} marginTop={10}></TextInput>
                     <View style={styles.captchaContainer}>
                         <Image style={styles.captchaImageStyle} source={Images.captcha}></Image>
                         <Icon style={{ marginLeft: 15 }} name="refresh" color="#000" size={19} />
                     </View>
-                    <TextInput placeholder="Captcha code" style={styles.captchaCodeTextInputStyle}></TextInput>
+                    <TextInput placeholder="Captcha code"
+                        onChangeText={text => this.onChangeUser(text,'captcha')} style={styles.captchaCodeTextInputStyle}></TextInput>
                 </View>
                 {this.renderSubmitBtn()}
             </View>

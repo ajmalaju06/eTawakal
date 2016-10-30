@@ -50,8 +50,6 @@ export class Login extends React.Component {
     onRegister() {
         this.props.navigator.push({ component: Registration });
 
-
-        AppStore.getCountryLust().then(response => { })
     }
 
     onLogin() {
