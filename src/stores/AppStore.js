@@ -81,6 +81,22 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         });
     },
 
+    registerUser: function (user) {
+        let userObject = {
+            ServiceUsersBE: {
+                UserName: user.userName, Password: user.password,
+                DeviceCode: this.deviceCode, TransactionCode: this.transactionCode
+            },
+            MobileUsersBE: {
+                UserName: user.userName, Password: user.password,
+                Mobile: user.mobile, CountryId: user.countryId,
+                UserTypeId: user.userTypeId
+            }
+        }:
+        return RequestManager
+            .post('userServices.svc/CreateUserAccount', userObject);
+    },
+
     syncLoginInfo: function (loginInfo) {
         let key = '@Etawakal:loginInfo';
         AsyncStorage.setItem(key, JSON.stringify(loginInfo));

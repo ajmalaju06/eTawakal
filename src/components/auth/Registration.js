@@ -25,7 +25,7 @@ import { Header } from '../shared/Header';
 import { Images } from '../../util/Images';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
-
+import { AppStore } from '../../stores/AppStore';
 /**
  * @class Registration
  * @extends React.Component
@@ -40,10 +40,52 @@ export class Registration extends React.Component {
          */
         this.state = {
             isValid: true,
-            username: '',
-            password: '',
-            isAuthenticating: false
+            user: {},
+            isSubmitting: false
         };
+    }
+
+    onRegisterUser() {
+        //validate
+        let valid = true;
+        if (this.state.user.userName == '') valid = false;
+        if (this.state.user.password == '') valid = false;
+        if (valid) {
+            this.setState({ isSubmitting: true })
+            AppStore.registerUser(this.state.user).then(response => {
+                if (response.Result) {
+                    //this.props.navigator.push({ component: AbcCom, props: {}})
+                }
+                this.setState({ isSubmitting: false });
+            }).catch(() => {
+                this.setState({ isSubmitting: false });
+            });
+        }
+    }
+
+    onChangeUser(text, field) {
+        let state = this.state.user;
+        state[field] = text;
+        this.setState({ user: state });
+    }
+
+    renderSubmitBtn() {
+        if (this.state.isSubmitting) {
+            return (
+                <View style={styles.continueButtonContainer}>
+                    <Text style={styles.buttonStyle}>
+                        Registering User
+                    </Text>
+                </View>
+            );
+        }
+        return (
+            <View style={styles.continueButtonContainer}>
+                <Text style={styles.buttonStyle}>
+                    Submit
+                </Text>
+            </View>
+        );
     }
 
     /**
@@ -55,12 +97,18 @@ export class Registration extends React.Component {
             <View style={styles.container}>
                 <Header />
                 <View style={{ marginTop: 10, flex: 1 }}>
-                    <TextInput placeholder="Place" style={styles.textInputContainer}></TextInput>
+                    <TextInput placeholder="Place"
+                        readOnly={this.state.isSubmitting}
+                        value={this.state.user.place}
+                        onChangeText={text => this.onChangeUser(text, 'place')}
+                        style={styles.textInputContainer}></TextInput>
                     <View style={styles.phoneNumberContainer}>
                         <TextInput placeholder="971" style={styles.contryCodeTextInput}></TextInput>
                         <TextInput placeholder="Phone number" style={styles.phoneNumberTextInput}></TextInput>
                     </View>
-                    <TextInput placeholder="User Name" style={styles.textInputContainer} marginTop={10}></TextInput>
+                    <TextInput placeholder="User Name"
+                        onChangeText={text => this.onChangeUser(text, 'userName')}
+                        style={styles.textInputContainer} marginTop={10}></TextInput>
                     <TextInput placeholder="Password" style={styles.textInputContainer} marginTop={10}></TextInput>
                     <TextInput placeholder="Confirm password" style={styles.textInputContainer} marginTop={10}></TextInput>
                     <View style={styles.captchaContainer}>
@@ -69,11 +117,7 @@ export class Registration extends React.Component {
                     </View>
                     <TextInput placeholder="Captcha code" style={styles.captchaCodeTextInputStyle}></TextInput>
                 </View>
-                <View style={styles.continueButtonContainer}>
-                    <Text style={styles.buttonStyle}>
-                        Submit
-                    </Text>
-                </View>
+                {this.renderSubmitBtn()}
             </View>
         );
     }
