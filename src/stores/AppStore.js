@@ -97,6 +97,191 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
             .post('userServices.svc/CreateUserAccount', userObject);
     },
 
+    getVerificationCode: function (user) {
+        let verificationcode = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            MobileUsersBE: {
+                UserName: user.userName,
+                Mobile: user.mobile,
+            }
+        };
+        return RequestManager
+            .post('userServices.svc / GetVerificationCode', verificationcode);
+    },
+    verifyVerificationCode: function (user) {
+        let verifyCode = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            MobileUsersBE: {
+                UserName: user.userName,
+                Mobile: user.mobile
+            },
+            VerificationCode: null
+        };
+        return RequestManager
+            .post('userServices.svc /VerifyVerificationCode', verifyCode);
+    },
+    uploadUserDocument: function (user) {
+        let userDocument = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            MobileUsersBE: {
+                UserName: user.userName,
+                Mobile: user.mobile,
+                DocumentsBE: {
+                    DocID: user.docid,
+                    DocFile: user.docfile
+                }
+            },
+        };
+        return RequestManager
+            .post('userServices.svc/UploadUserDocument', userDocument);
+    },
+    updateUserAccountInformation: function (user) {
+        let userAccountInformation = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            MobileUsersBE: {
+                UserName: user.username,
+                Mobile: user.mobile,
+                UserInformationBE: {
+                    FirstName: user.firstname,
+                    MiddleName: user.middilename,
+                    LastName: user.lastname,
+                    Email: uer.email,
+                    DateofBirth: user.dateofbirth,
+                    Gender: user.gender,
+                    Nationalility: user.nationality,
+                    geoLocation: user.geolocation
+                }
+            }
+        };
+        return RequestManager
+            .post('userServices.svc /UpdateUserAccountInformation', userAccountInformation);
+    },
+    updateUserPinNumber: function (user) {
+        let userPinNumber = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            MobileUsersBE: {
+                UserName: user.username,
+                Mobile: user.mobile,
+                DeviceCode: this.deviceCode,
+                Pin: this.pin
+            }
+        };
+        return RequestManager
+            .post('userServices.svc / UpdateUserPinNumber', userPinNumbera);
+    },
+    mobileUserAppLogin: function (user) {
+        let mobileuserapplogin = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            MobileUsersBE: {
+                UserName: user.username,
+                Mobile: user.mobile,
+                DeviceCode: this.deviceCode,
+            }
+        };
+        return RequestManager
+            .post('userServices.svc / MobileUserAppLogin', mobileuserapplogin);
+    },
+    normalTransferRequest: function (user) {
+        let nomaltransferrequest = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            TransactionBE: {
+                Amount: user.amount,
+                FeesOptionID: user.feeoptionId,
+                MobileUsersBE: {
+                    UserName: user.userName,
+                    MobileUserId: user.mobileuserId,
+                    DeviceCode: this.deviceCode,
+                },
+                BeneficiaryBE: {
+                    MobileNo: user.mobilenumber
+                }
+            }
+        };
+        return RequestManager
+            .post('TransferOperations.svc / NormalTransferRequest', nomaltransferrequest);
+    },
+    submitTransferRequest: function (user) {
+        let submitTransferRequest = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            TransactionBE: {
+                Amount: user.amount,
+                FeesOptionID: user.feeoptionId,
+                MobileUsersBE: {
+                    UserName: user.userName,
+                    MobileUserId: user.mobileuserId,
+                    DeviceCode: this.deviceCode,
+                    PinNumber: users.pinNumber
+                },
+                BeneficiaryBE: {
+                    MobileNo: users.mobileNumber,
+                    BeneficiaryId: users.benificiaryId
+                }
+            }
+        };
+        return RequestManager
+            .post('TransferOperations.svc / SubmitTransferRequest', submitTransferRequest);
+    },
+    PaymeRegisterTransferRequest: function (user) {
+        let paymeRegisterTransferRequest = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            MobileUsersBE: {
+                UserName: user.userName,
+                MobileUserId: user.mobileUserId,
+                DeviceCode: this.deviceCode,
+            },
+            BeneficiaryBE: {
+                MobileNo: user.mobileNo
+            }
+        };
+        return RequestManager
+            .post('TransferOperations.svc / PayMeRegisterTransferRequest', paymeRegisterTransferRequest);
+    },
+
     syncLoginInfo: function (loginInfo) {
         let key = '@Etawakal:loginInfo';
         AsyncStorage.setItem(key, JSON.stringify(loginInfo));
