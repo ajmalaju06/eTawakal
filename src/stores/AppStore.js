@@ -281,6 +281,124 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('TransferOperations.svc / PayMeRegisterTransferRequest', paymeRegisterTransferRequest);
     },
+    PaymeGetLastTransferRequest: function (user) {
+        let paymeGetLastTransferReques = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            TransactionBE: {
+                TransReqTypeId: user.transReqTypeId,
+                MobileUsersBE: {
+                    UserName: user.username,
+                    MobileUserId: user.mobileUserId,
+                    DeviceCode: this.deviceCode,
+                }
+            }
+        };
+        return RequestManager
+            .post('TransferOperations.svc / PayMeGetLastTransferRequests', paymeGetLastTransferReques);
+    },
+    PayMeProcessTransferRequest: function (user) {
+        let paymeProcessTransferRequest = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            TransactionBE: {
+                ProcessType: user.proccessType,
+                MobileUsersBE: {
+                    UserName: user.username,
+                    MobileUserId: user.mobileUserId,
+                    DeviceCode: this.deviceCode,
+                    pin: user.pin
+                },
+                TransferRequestBE: {
+                    TransferReqId: user.transferReqId
+                }
+            }
+        };
+        return RequestManager
+            .post('TestService/TransferOperations.svc / PayMeProcessTransferRequest', paymeProcessTransferRequests);
+    },
+    PayMeGetListofTransferRequests: function (user) {
+        let paymeGetListofTransferRequests = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            TransactionBE: {
+                TransReqTypeId: user.transReqTypeId,
+                MobileUsersBE: {
+                    UserName: user.username,
+                    MobileUserId: user.mobileUserId,
+                    DeviceCode: this.deviceCode,
+                }
+            }
+        };
+        return RequestManager
+            .post('TransferOperations.svc / PayMeGetListofTransferRequests', paymeGetListofTransferRequests);
+    },
+    RemittanceGetBenefeciaryList: function (user) {
+        let remittanceGetBenefeciaryList = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            TransactionBE: {
+                BenTypeId: user.benTypeId,
+                MobileUsersBE: {
+                    UserName: user.username,
+                    MobileUserId: user.mobileUserId,
+                    DeviceCode: this.deviceCode,
+                }
+            }
+        };
+        return RequestManager
+            .post('remittanceoperations.svc/ RemittanceGetBenefeciaryList', remittanceGetBenefeciaryList)
+    },
+    SubmitRemittanceSendRequest: function (user) {
+        let submitRemittanceSendRequest = {
+            ServiceUsersBE: {
+                UserName: user.userName,
+                Password: user.password,
+                DeviceCode: this.deviceCode,
+                TransactionCode: this.transactionCode
+            },
+            TransactionBE: {
+                SenderMessage: user.senderMessage,
+                Purpose: user.purpose,
+                Amount: user.amount,
+                MobileUsersBE: {
+                    UserName: user.username,
+                    MobileUserId: user.mobileUserId,
+                    DeviceCode: this.deviceCode,
+                    Pin: user.pin
+                },
+                BeneficiaryBE: {
+                    FirstName: user.firstName,
+                    MiddleName: user.middileName,
+                    LastName: user.lastName,
+                    Address: user.address,
+                    Email: user.email,
+                    MobileNo: user.mobileNo,
+                    City: user.city,
+                    Country: user.country
+                }
+            }
+        };
+        return RequestManager
+            .post('remittanceoperations.svc/ SubmitRemittanceSendRequest', submitRemittanceSendRequest);
+    },
+
 
     syncLoginInfo: function (loginInfo) {
         let key = '@Etawakal:loginInfo';
