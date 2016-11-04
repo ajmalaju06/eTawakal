@@ -22,13 +22,19 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableHighlight, Image } from 'react-native';
+import {
+    StyleSheet, Text, TextInput, View, TouchableOpacity, Image,
+    ActivityIndicator
+} from 'react-native';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
+import * as Progress from 'react-native-progress';
 
 import { Header } from '../shared/Header';
 import { Images } from '../../util/Images';
 import { AppStore } from '../../stores/AppStore';
 import { Registration } from './Registration';
+import { HomeNew } from './HomeNew';
 /**
  * @class Login
  * @extends React.Component
@@ -48,15 +54,42 @@ export class Login extends React.Component {
     }
 
     onRegister() {
-        this.props.navigator.push({ component: Registration });
+        this.props.navigator.push({ component: HomeNew });
 
     }
 
     onLogin() {
-        AppStore.partnerLogin().then(response => {
-            if (response.Result)
-                this.props.navigator.push({ component: Registration });
-        });
+        this.setState({ isAuthenticating: true });
+        let user = {
+            username: this.state.username,
+            password: this.state.password,
+            mobile: ''
+        };
+        /*AppStore.mobileUserAppLogin(user).then(response => {
+            if (response.Result) {
+                this.props.navigator.push({ component: HomeNew });
+            }
+        });*/
+        this.props.navigator.push({ component: HomeNew });
+    }
+
+    renderLoginButton() {
+        if (this.state.isAuthenticating) {
+            return (
+                <View style={styles.loginButtonContainerWithoutStyle}>
+                    <Text style={[styles.buttonStyle, { color: '#333' }]}>Authenticating</Text>
+                </View>
+            );
+        }
+        else {
+            return (
+                <TouchableOpacity onPress={this.onLogin.bind(this)}>
+                    <View style={styles.loginButtonContainer}>
+                        <Text style={styles.buttonStyle}>Login</Text>
+                    </View>
+                </TouchableOpacity>
+            );
+        }
     }
 
     render() {
@@ -72,14 +105,10 @@ export class Login extends React.Component {
                         onChangeText={text => this.setState({ password: text })}
                         value={this.state.password}
                         style={styles.textInputContainer} marginTop={25}></TextInput>
-                    <TouchableHighlight onPress={this.onLogin.bind(this)}>
-                        <View style={styles.loginButtonContainer}>
-                            <Text style={styles.buttonStyle}>Login{this.state.username}</Text>
-                        </View>
-                    </TouchableHighlight>
+                    {this.renderLoginButton()}
                     <Text style={styles.forgotPasswordTextStyle}>Forgot password ?</Text>
                 </View>
-                <TouchableHighlight onPress={this.onRegister.bind(this)}>
+                <TouchableOpacity onPress={this.onRegister.bind(this)}>
                     <View style={styles.registerContainer}>
                         <Text style={styles.registerAccountTextStyle}>
                             Register New Account
@@ -88,7 +117,7 @@ export class Login extends React.Component {
                             <Icon name="plus" color="#FFF" size={15} />
                         </View>
                     </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -132,6 +161,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#e44c0d',
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop: 30
+    },
+    loginButtonContainerWithoutStyle: {
+        width: 250,
+        height: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
         marginTop: 30
     },
     buttonStyle: {

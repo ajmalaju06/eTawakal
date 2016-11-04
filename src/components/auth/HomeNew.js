@@ -22,16 +22,21 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
 import { Images } from '../../util/Images';
+import { Transfer } from './Transfer';
 
 /**
  * @class HomeNew
  * @extends React.Component
  */
 export class HomeNew extends React.Component {
+
+    onTransfer() {
+        this.props.navigator.push({ component: Transfer });
+    }
 
     /**
      * @render
@@ -44,34 +49,46 @@ export class HomeNew extends React.Component {
                 <CreditInfo />
                 <View style={styles.contentContainer}>
                     <View style={styles.menuContainer} marginTop={40}>
-                        <View style={styles.tile}>
-                            <Image source={Images.ic_transfer} />
-                            <Text style={styles.tileText}> Transfer</Text>
-                        </View>
-                        <View style={styles.tile}>
-                            <Image source={Images.ic_payme} />
-                            <Text style={styles.tileText}> Pay - Me</Text>
-                        </View>
+                        <TouchableOpacity style={styles.tile} onPress={this.onTransfer.bind(this)}>
+                            <View style={styles.tileInnerCt}>
+                                <Image source={Images.ic_transfer} />
+                                <Text style={styles.tileText}> Transfer</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.tile}>
+                            <View style={styles.tileInnerCt}>
+                                <Image source={Images.ic_payme} />
+                                <Text style={styles.tileText}> Pay - Me</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.menuContainer}>
-                        <View style={styles.tile}>
-                            <Image source={Images.ic_payment} />
-                            <Text style={styles.tileText}> Payment</Text>
-                        </View>
-                        <View style={styles.tile}>
-                            <Image source={Images.ic_approve} />
-                            <Text style={styles.tileText}> Approve</Text>
-                        </View>
+                        <TouchableOpacity style={styles.tile}>
+                            <View style={styles.tileInnerCt}>
+                                <Image source={Images.ic_payment} />
+                                <Text style={styles.tileText}> Payment</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.tile}>
+                            <View style={styles.tileInnerCt}>
+                                <Image source={Images.ic_approve} />
+                                <Text style={styles.tileText}> Approve</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.menuContainer}>
-                        <View style={styles.tile}>
-                            <Image source={Images.ic_send_fund} />
-                            <Text style={styles.tileText}> Send Fund</Text>
-                        </View>
-                        <View style={styles.tile}>
-                            <Image source={Images.ic_mobile_money} />
-                            <Text style={styles.tileText}> Mobile Money</Text>
-                        </View>
+                        <TouchableOpacity style={styles.tile}>
+                            <View style={styles.tileInnerCt}>
+                                <Image source={Images.ic_send_fund} />
+                                <Text style={styles.tileText}> Send Fund</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.tile}>
+                            <View style={styles.tileInnerCt}>
+                                <Image source={Images.ic_mobile_money} />
+                                <Text style={styles.tileText}> Mobile Money</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.lastMenuContainer}>
                         <Image source={Images.ic_find_merchant} />
@@ -112,6 +129,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 3,
         flex: 1,
+        alignItems: 'stretch'
+    },
+    tileInnerCt: {
         alignItems: 'center',
         justifyContent: 'center'
     },

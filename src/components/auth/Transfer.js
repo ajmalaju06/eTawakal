@@ -33,6 +33,15 @@ import { Images } from '../../util/Images';
  */
 export class Transfer extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            beneficiaryNo: '',
+            amount: 0,
+            message: ''
+        };
+    }
+
     /**
      * @render
      * @return {View} view

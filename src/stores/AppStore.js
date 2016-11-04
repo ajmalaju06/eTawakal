@@ -59,7 +59,7 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
                     statusDescription: response.StatusDescription
                 };
                 this.transactionCode = loginInfo.transactionCode;
-                this.syncLoginInfo(loginInfo)
+                this.syncLoginInfo(loginInfo);
             }
             return response;
         });
@@ -113,6 +113,7 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('userServices.svc / GetVerificationCode', verificationcode);
     },
+
     verifyVerificationCode: function (user) {
         let verifyCode = {
             ServiceUsersBE: {
@@ -130,6 +131,7 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('userServices.svc /VerifyVerificationCode', verifyCode);
     },
+
     uploadUserDocument: function (user) {
         let userDocument = {
             ServiceUsersBE: {
@@ -150,6 +152,7 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('userServices.svc/UploadUserDocument', userDocument);
     },
+
     updateUserAccountInformation: function (user) {
         let userAccountInformation = {
             ServiceUsersBE: {
@@ -176,6 +179,7 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('userServices.svc /UpdateUserAccountInformation', userAccountInformation);
     },
+
     updateUserPinNumber: function (user) {
         let userPinNumber = {
             ServiceUsersBE: {
@@ -194,6 +198,7 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('userServices.svc / UpdateUserPinNumber', userPinNumbera);
     },
+
     mobileUserAppLogin: function (user) {
         let mobileuserapplogin = {
             ServiceUsersBE: {
@@ -209,8 +214,9 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
             }
         };
         return RequestManager
-            .post('userServices.svc / MobileUserAppLogin', mobileuserapplogin);
+            .post('userServices.svc/MobileUserAppLogin', mobileuserapplogin);
     },
+
     normalTransferRequest: function (user) {
         let nomaltransferrequest = {
             ServiceUsersBE: {
@@ -235,6 +241,7 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('TransferOperations.svc / NormalTransferRequest', nomaltransferrequest);
     },
+
     submitTransferRequest: function (user) {
         let submitTransferRequest = {
             ServiceUsersBE: {
@@ -261,7 +268,8 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('TransferOperations.svc / SubmitTransferRequest', submitTransferRequest);
     },
-    PaymeRegisterTransferRequest: function (user) {
+
+    paymeRegisterTransferRequest: function (user) {
         let paymeRegisterTransferRequest = {
             ServiceUsersBE: {
                 UserName: user.userName,
@@ -281,7 +289,8 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('TransferOperations.svc / PayMeRegisterTransferRequest', paymeRegisterTransferRequest);
     },
-    PaymeGetLastTransferRequest: function (user) {
+
+    paymeGetLastTransferRequest: function (user) {
         let paymeGetLastTransferReques = {
             ServiceUsersBE: {
                 UserName: user.userName,
@@ -301,7 +310,8 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('TransferOperations.svc / PayMeGetLastTransferRequests', paymeGetLastTransferReques);
     },
-    PayMeProcessTransferRequest: function (user) {
+
+    payMeProcessTransferRequest: function (user) {
         let paymeProcessTransferRequest = {
             ServiceUsersBE: {
                 UserName: user.userName,
@@ -325,7 +335,8 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('TestService/TransferOperations.svc / PayMeProcessTransferRequest', paymeProcessTransferRequests);
     },
-    PayMeGetListofTransferRequests: function (user) {
+
+    payMeGetListofTransferRequests: function (user) {
         let paymeGetListofTransferRequests = {
             ServiceUsersBE: {
                 UserName: user.userName,
@@ -345,7 +356,8 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('TransferOperations.svc / PayMeGetListofTransferRequests', paymeGetListofTransferRequests);
     },
-    RemittanceGetBenefeciaryList: function (user) {
+
+    remittanceGetBenefeciaryList: function (user) {
         let remittanceGetBenefeciaryList = {
             ServiceUsersBE: {
                 UserName: user.userName,
@@ -365,7 +377,8 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('remittanceoperations.svc/ RemittanceGetBenefeciaryList', remittanceGetBenefeciaryList)
     },
-    SubmitRemittanceSendRequest: function (user) {
+
+    submitRemittanceSendRequest: function (user) {
         let submitRemittanceSendRequest = {
             ServiceUsersBE: {
                 UserName: user.userName,
@@ -398,7 +411,6 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         return RequestManager
             .post('remittanceoperations.svc/ SubmitRemittanceSendRequest', submitRemittanceSendRequest);
     },
-
 
     syncLoginInfo: function (loginInfo) {
         let key = '@Etawakal:loginInfo';

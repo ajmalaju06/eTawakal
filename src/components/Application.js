@@ -77,7 +77,7 @@ export class Application extends React.Component {
     };
 
     componentDidMount() {
-        NavigationStore.setNavigator(this.refs.navigator);
+        AppStore.partnerLogin().then(response => { });
     }
 
     /**
