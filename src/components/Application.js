@@ -38,6 +38,7 @@ import { RegisterInfo } from './auth/RegisterInfo';
 import { Registration } from './auth/Registration';
 import { Home } from './auth/Home'
 import { CreditInfo } from './shared/CreditInfo';
+import { WhoPays } from './shared/WhoPays';
 import { ApproveConfirm } from './auth/ApproveConfirm';
 import { Approve } from './auth/Approve';
 import { Marchant } from './auth/Marchant';
@@ -77,7 +78,9 @@ export class Application extends React.Component {
     };
 
     componentDidMount() {
-        AppStore.partnerLogin().then(response => { });
+        AppStore.partnerLogin().then(response => {
+            console.warn('partner logged in');
+        });
     }
 
     /**

@@ -22,13 +22,22 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import SlideDownPanel from './SlideDownPanel';
+
+const { width, height } = Dimensions.get('window');
 
 /**
  * @class CreditInfo
  * @extends React.Component
  */
 export class CreditInfo extends React.Component {
+
+    constructor() {
+        super();
+    }
+
 
     /**
      * @render
@@ -37,8 +46,13 @@ export class CreditInfo extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.creditContainer}>
+                <View style={styles.iconWrapper}>
+                    <Icon name="refresh" color="#FFF" size={18} />
+                </View>
+                <View style={{ flex: 1 }}>
                     <Text style={styles.balanceTextStyle}>Balance</Text>
+                </View>
+                <View style={styles.creditContainer}>
                     <Text style={styles.amountTextStyle}>5000$</Text>
                 </View>
             </View>
@@ -48,25 +62,31 @@ export class CreditInfo extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'stretch',
-        backgroundColor: '#F5FCFF',
+        alignItems: 'center',
+        backgroundColor: '#c73629',
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     creditContainer: {
         height: 50,
         flexDirection: 'row',
-        backgroundColor: '#c73629',
         alignItems: 'center',
         justifyContent: 'center'
     },
     balanceTextStyle: {
         color: 'white',
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 16
     },
     amountTextStyle: {
         color: 'white',
         fontWeight: 'bold',
-        fontSize: 27,
-        marginLeft: 130
+        fontSize: 18,
+        marginLeft: 130,
+        marginRight: 20
+    },
+    iconWrapper: {
+        marginLeft: 10,
+        marginRight: 10
     }
 });

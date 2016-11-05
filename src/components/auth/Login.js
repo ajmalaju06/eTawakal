@@ -28,7 +28,6 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import * as Progress from 'react-native-progress';
 
 import { Header } from '../shared/Header';
 import { Images } from '../../util/Images';
@@ -61,16 +60,15 @@ export class Login extends React.Component {
     onLogin() {
         this.setState({ isAuthenticating: true });
         let user = {
-            username: this.state.username,
-            password: this.state.password,
-            mobile: ''
+            username: 'Sunil',
+            password: 'abc123@',
+            mobile: '919745442770'
         };
-        /*AppStore.mobileUserAppLogin(user).then(response => {
+        AppStore.mobileUserAppLogin(user).then(response => {
             if (response.Result) {
                 this.props.navigator.push({ component: HomeNew });
             }
-        });*/
-        this.props.navigator.push({ component: HomeNew });
+        });
     }
 
     renderLoginButton() {
@@ -95,7 +93,7 @@ export class Login extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Header />
+                <Header isLoginPage={true} />
                 <View style={styles.loginContainer}>
                     <TextInput placeholder="Username"
                         onChangeText={text => this.setState({ username: text })}
@@ -112,7 +110,7 @@ export class Login extends React.Component {
                     <View style={styles.registerContainer}>
                         <Text style={styles.registerAccountTextStyle}>
                             Register New Account
-          			</Text>
+          			    </Text>
                         <View style={styles.iconContainer}>
                             <Icon name="plus" color="#FFF" size={15} />
                         </View>

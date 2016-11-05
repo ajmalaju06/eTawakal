@@ -22,10 +22,12 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Radio, Option, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Radio, Option, Image, TouchableOpacity } from 'react-native';
 import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
 import { Images } from '../../util/Images';
+import { AppStore } from '../../stores/AppStore';
+import RadioButton from 'react-native-radio-button'
 
 /**
  * @class Transfer
@@ -33,13 +35,23 @@ import { Images } from '../../util/Images';
  */
 export class Transfer extends React.Component {
 
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
             beneficiaryNo: '',
             amount: 0,
-            message: ''
+            message: '',
+            whoPays: 1
         };
+
+        if (props.data) {
+            this.state.beneficiaryNo = props.data.beneficiaryNo
+        }
+    }
+
+    onTransfer() {
+        let users = {
+        }
     }
 
     /**
@@ -49,14 +61,17 @@ export class Transfer extends React.Component {
     render() {
         return (
             <Image style={styles.container} source={Images.background_pattern}>
-                <Header />
+                <Header isHomePage={false} navigator={this.props.navigator} />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
                     <View style={styles.lineStyle}></View>
-                    <Text style={styles.approveHeadingStyle}>NEAR BY</Text>
+                    <Text style={styles.approveHeadingStyle}>TRANSFER</Text>
                     <View style={styles.listviewContainer}>
                         <View style={styles.textInputDetailContainer}>
-                            <TextInput placeholder="Benificiery number" style={styles.textInputContainer}></TextInput>
+                            <TextInput placeholder="Benificiery number"
+                                value={this.state.beneficiaryNo}
+                                style={styles.textInputContainer}>
+                            </TextInput>
                         </View>
                         <View style={styles.textInputDetailContainer}>
                             <TextInput placeholder="Amount" style={styles.textInputContainer}></TextInput>
@@ -65,13 +80,37 @@ export class Transfer extends React.Component {
                             <TextInput placeholder="Message" style={styles.textInputContainer}></TextInput>
                         </View>
                         <Text style={styles.whoPaysTextTyle}>Who pays the fee ?</Text>
-                        <View style={{ marginTop: 20 }}>
+                        <View style={{ marginTop: 20, alignItems: 'flex-start' }}>
+                            <View style={styles.radioButtonCt}>
+                                <RadioButton
+                                    animation={'bounceIn'}
+                                    isSelected={this.state.whoPays == 1}
+                                    onPress={() => this.setState({ whoPays: 1 })} />
+                                <Text> I Pay</Text>
+                            </View>
+                            <View style={styles.radioButtonCt}>
+                                <RadioButton
+                                    animation={'bounceIn'}
+                                    isSelected={this.state.whoPays == 2}
+                                    onPress={() => this.setState({ whoPays: 2 })}
+                                    />
+                                <Text> Reciepient Pay</Text>
+                            </View>
+                            <View style={styles.radioButtonCt}>
+                                <RadioButton
+                                    animation={'bounceIn'}
+                                    isSelected={this.state.whoPays == 3}
+                                    onPress={() => this.setState({ whoPays: 3 })} />
+                                <Text>Share 50/50</Text>
+                            </View>
                         </View>
                     </View>
                 </View>
-                <View style={styles.approveButtonContainer} backgroundColor={'#22ab3b'}>
-                    <Text style={styles.qrCodeButtonStyle}>SEND</Text>
-                </View>
+                <TouchableOpacity>
+                    <View style={styles.approveButtonContainer} backgroundColor={'#22ab3b'}>
+                        <Text style={styles.qrCodeButtonStyle}>SEND</Text>
+                    </View>
+                </TouchableOpacity>
             </Image >
         );
     }
@@ -110,7 +149,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         height: 80,
         flex: 1,
-        alignItems: 'center',
         width: 280,
     },
     textInputContainer: {
@@ -127,13 +165,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 35,
-        marginLeft: 60
-        // shadowColor: 'black',
-        // shadowOpacity: .6,
-        // shadowOffset: {
-        // width: .5,
-        // height: .5,
-        // },
+        marginLeft: 60,
+        shadowColor: 'black',
+        shadowOpacity: .6,
+        shadowOffset: {
+            width: .5,
+            height: .5,
+        },
+    },
+    radioButtonCt: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10
     },
     qrCodeButtonStyle: {
         color: '#FFF',
@@ -145,7 +189,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     whoPaysTextTyle: {
-        marginTop: 10,
-        flexDirection: 'row'
+        marginTop: 20,
+        flexDirection: 'row',
+        textAlign: 'center'
     }
 });

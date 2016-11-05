@@ -22,7 +22,7 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Images } from '../../util/Images';
 import Icon from 'react-native-vector-icons/FontAwesome';
 /**
@@ -39,6 +39,46 @@ export class Header extends React.Component {
          */
         this.state = {};
     }
+
+    renderMenuButton() {
+        return (
+            <TouchableOpacity>
+                <View style={{ width: 30, alignItems: 'center', justifyContent: 'center' }}>
+                    <Icon name="bars" color="gray" size={18} />
+                </View>
+            </TouchableOpacity>
+        );
+    }
+
+
+    onBackPress() {
+        if (this.props.navigator) {
+            this.props.navigator.pop();
+        }
+    }
+
+    renderBackButton() {
+        return (
+            <TouchableOpacity onPress={this.onBackPress.bind(this)}>
+                <View style={{ width: 30, alignItems: 'center', justifyContent: 'center' }}>
+                    <Icon name="arrow-left" color="gray" size={18} />
+                </View>
+            </TouchableOpacity>
+        );
+    }
+
+    renderButton() {
+        if (!this.props.isLoginPage) {
+            if (this.props.isHomePage) {
+                return this.renderMenuButton();
+            }
+            else {
+                return this.renderBackButton();
+            }
+        }
+        return null;
+    }
+
     /**
      * @render
      * @return {View} view
@@ -47,12 +87,18 @@ export class Header extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.welcome}>
-                    <View style={{ width: 30, alignItems: 'center', justifyContent: 'center' }}>
-                        <Icon name="bars" color="gray" size={18} />
-                    </View>
+                    {this.renderButton()}
                     <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'center' }}>
                         <Image source={Images.twkal_exprs_logo} style={{ width: 200, height: 40 }}></Image>
                     </View>
+                    {(() => {
+                        if (!this.props.isLoginPage) {
+                            <View style={{ flexDirection: 'row', marginRight: 15 }}>
+                                <Icon name="home" size={20} color="gray" style={{ marginRight: 20 }} />
+                                <Icon name="phone" size={20} color="gray" />
+                            </View>
+                        }
+                    })()}
                 </View>
             </View>
         );
@@ -74,7 +120,9 @@ const styles = StyleSheet.create({
     },
     welcome: {
         marginTop: 20,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     textContainer: {
         width: 80,

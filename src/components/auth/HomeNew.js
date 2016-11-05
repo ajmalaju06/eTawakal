@@ -27,7 +27,14 @@ import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
 import { Images } from '../../util/Images';
 import { Transfer } from './Transfer';
-
+import { PayMe } from './PayMe';
+import { Payment } from './Payment';
+import { Approve } from './Approve';
+import { SendFund } from './SendFund';
+import { MobileMoney } from './MobileMoney';
+import { FindMerchant } from './MobileMoney';
+import { TransferHistory } from './TransferHistory';
+import { PayMeHome } from './PayMeHome';
 /**
  * @class HomeNew
  * @extends React.Component
@@ -35,9 +42,26 @@ import { Transfer } from './Transfer';
 export class HomeNew extends React.Component {
 
     onTransfer() {
-        this.props.navigator.push({ component: Transfer });
+        this.props.navigator.push({ component: TransferHistory });
     }
-
+    onPaymeHome() {
+        this.props.navigator.push({ component: PayMeHome });
+    }
+    onPayment() {
+        this.props.navigator.push({ component: Payment });
+    }
+    onApprove() {
+        this.props.navigator.push({ component: Approve });
+    }
+    onSendFund() {
+        this.props.navigator.push({ component: SendFund });
+    }
+    onMobileMoney() {
+        this.props.navigator.push({ component: MobileMoney });
+    }
+    onMobileMoney() {
+        this.props.navigator.push({ component: MobileMoney });
+    }
     /**
      * @render
      * @return {View} view
@@ -45,54 +69,64 @@ export class HomeNew extends React.Component {
     render() {
         return (
             <Image style={styles.container} source={Images.background_pattern}>
-                <Header />
+                <Header isHomePage={true} navigator={this.props.navigator} />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
                     <View style={styles.menuContainer} marginTop={40}>
                         <TouchableOpacity style={styles.tile} onPress={this.onTransfer.bind(this)}>
                             <View style={styles.tileInnerCt}>
-                                <Image source={Images.ic_transfer} />
+                                <Image style={styles.menuIcon} source={Images.ic_transfer} />
                                 <Text style={styles.tileText}> Transfer</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.tile}>
+                        <TouchableOpacity style={styles.tile} onPress={this.onPaymeHome.bind(this)}>
                             <View style={styles.tileInnerCt}>
-                                <Image source={Images.ic_payme} />
+                                <Image style={styles.menuIcon} source={Images.ic_payme} />
                                 <Text style={styles.tileText}> Pay - Me</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.menuContainer}>
-                        <TouchableOpacity style={styles.tile}>
+                        <TouchableOpacity style={styles.tile} onPress={this.onPayment.bind(this)}>
                             <View style={styles.tileInnerCt}>
-                                <Image source={Images.ic_payment} />
+                                <Image style={styles.menuIcon} source={Images.ic_payment} />
                                 <Text style={styles.tileText}> Payment</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.tile}>
+                        <TouchableOpacity style={styles.tile} onPress={this.onApprove.bind(this)}>
                             <View style={styles.tileInnerCt}>
-                                <Image source={Images.ic_approve} />
+                                <Image style={styles.menuIcon} source={Images.ic_approve} />
                                 <Text style={styles.tileText}> Approve</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.menuContainer}>
-                        <TouchableOpacity style={styles.tile}>
+                        <TouchableOpacity style={styles.tile} onPress={this.onSendFund.bind(this)}>
                             <View style={styles.tileInnerCt}>
-                                <Image source={Images.ic_send_fund} />
+                                <Image style={styles.menuIcon} source={Images.ic_send_fund} />
                                 <Text style={styles.tileText}> Send Fund</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.tile}>
+                        <TouchableOpacity style={styles.tile} onPress={this.onMobileMoney.bind(this)}>
                             <View style={styles.tileInnerCt}>
-                                <Image source={Images.ic_mobile_money} />
+                                <Image style={styles.menuIcon} source={Images.ic_mobile_money} />
                                 <Text style={styles.tileText}> Mobile Money</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.lastMenuContainer}>
-                        <Image source={Images.ic_find_merchant} />
-                        <Text style={styles.tileText}> Find Merchant</Text>
+                    <View style={styles.menuContainer}>
+                        <TouchableOpacity style={styles.tile} onPress={this.onSendFund.bind(this)}>
+                            <View style={styles.tileInnerCt}>
+                                <Image style={styles.menuIcon} source={Images.ic_find_merchant} />
+                                <Text style={styles.tileText}>Find Merchant</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.tile} onPress={this.onMobileMoney.bind(this)}>
+                            <View style={styles.tileInnerCt}>
+                                <Image style={styles.menuIcon} source={Images.ic_mobile_money} />
+                                <Text style={styles.tileText}>Reports</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Image >
@@ -109,7 +143,6 @@ const styles = StyleSheet.create({
         height: null
     },
     contentContainer: {
-        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 20,
@@ -119,21 +152,29 @@ const styles = StyleSheet.create({
     },
     tileText: {
         color: '#464646',
-        fontSize: 16,
-        fontWeight: 'bold'
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginTop: 5
     },
     tile: {
+        backgroundColor: '#FFF',
         height: 80,
         margin: 5,
         borderColor: '#bababa',
         borderWidth: 1,
         borderRadius: 3,
         flex: 1,
-        alignItems: 'stretch'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     tileInnerCt: {
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flexDirection: 'column'
+    },
+    menuIcon: {
+        width: 32,
+        height: 32
     },
     menuContainer: {
         marginLeft: 10,

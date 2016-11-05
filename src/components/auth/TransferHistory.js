@@ -22,25 +22,43 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView, Image } from 'react-native';
+import { View, Text, StyleSheet, ListView, Image, TouchableOpacity } from 'react-native';
 import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
 import { Images } from '../../util/Images';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Transfer } from './Transfer'
+import faker from 'faker';
 
 /**
- * @class MobileMoney
+ * @class TansferHistory
  * @extends React.Component
  */
-export class MobileMoney extends React.Component {
+export class TransferHistory extends React.Component {
 
     constructor() {
         super();
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        let data = [];
+        for (var i = 0; i < 10; i++) {
+            data.push({
+                name: faker.name.firstName(),
+                city: faker.address.city(),
+                phone: faker.phone.phoneNumber(),
+                beneficiaryNo: faker.finance.account()
+            })
+        }
         this.state = {
-            dataSource: ds.cloneWithRows(['row 1', 'row 2', 'row 3', 'row 4', '6', '7', '8', '9', '10'
-                , 'row 1', 'row 2', 'row 3', 'row 4', '6', '7', '8', '9', '10', 'sdf', 'sdfsfdf', 'sdfsdf']),
+            dataSource: ds.cloneWithRows(data)
         };
+    }
+
+    onPress(data) {
+        this.props.navigator.push({
+            component: Transfer, props: {
+                data: data
+            }
+        })
     }
 
     /**
@@ -49,28 +67,34 @@ export class MobileMoney extends React.Component {
      */
     renderRow(rowData, index) {
         let component = (
-            <View key={index} style={styles.listviewContainer}>
-                <View style={{ height: 40, }}>
-                    <Text style={styles.listviewTextStyle}>USER NAME</Text>
-                    <Text style={styles.listviewTextStyle}>+91745649487   </Text>
+            <TouchableOpacity onPress={() => this.onPress(rowData)}>
+                <View key={index} style={styles.listviewContainer}>
+                    <View style={{ height: 40, }}>
+                        <Text style={styles.listviewTextStyle}>{rowData.name}</Text>
+                        <Text style={styles.listviewTextStyle}>{rowData.phone}</Text>
+                    </View>
                 </View>
-            </View >
+            </TouchableOpacity>
         );
         return component;
     }
 
+    onTransferAdd() {
+        this.props.navigator.push({ component: Transfer });
+    }
+
     /**
-     * @render
-     * @return {View} view
-     */
+    * @render
+    * @return { View } view
+    */
     render() {
         return (
             <Image style={styles.container} source={Images.background_pattern}>
-                <Header />
+                <Header isHomePage={false} navigator={this.props.navigator} />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
                     <View style={styles.lineStyle}></View>
-                    <Text style={styles.approveHeadingStyle}>MOBILE MONEY</Text>
+                    <Text style={styles.approveHeadingStyle}>TRANSFER</Text>
                     <View style={{ flex: 1 }}>
                         <ListView
                             dataSource={this.state.dataSource}
@@ -78,9 +102,11 @@ export class MobileMoney extends React.Component {
                     </View>
                 </View>
                 <View style={styles.registerContainer}>
-                    <View style={styles.iconContainer}>
-                        <Icon name="plus" color="#FFF" size={20} />
-                    </View>
+                    <TouchableOpacity onPress={this.onTransferAdd.bind(this)}>
+                        <View style={styles.iconContainer}>
+                            <Icon name="plus" color="#FFF" size={18} />
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </Image >
         );
@@ -126,7 +152,7 @@ const styles = StyleSheet.create({
     },
     registerContainer:
     {
-        height: 40,
+        height: 100,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center'
@@ -137,13 +163,13 @@ const styles = StyleSheet.create({
         marginRight: 5
     },
     iconContainer: {
-        width: 60,
-        height: 60,
+        width: 50,
+        height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         elevation: 10,
         marginRight: 20,
-        marginBottom: 40,
+        marginBottom: 20,
         backgroundColor: '#073D96',
         borderRadius: 30,
         shadowColor: 'black',

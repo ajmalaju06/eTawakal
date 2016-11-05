@@ -1,24 +1,4 @@
-/**
- * The MIT License (MIT)
- * Copyright (c) 2016 Aitrich Technologies
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
- * and associated documentation files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all copies or substantial
- * portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
- * LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
- * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
- * @author Ajmal<ajmalaju06@gmail.com>
- */
+
 
 'use strict';
 import React, { Component } from 'react';
@@ -27,12 +7,34 @@ import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
 import { WhoPays } from '../shared/WhoPays';
 import { Images } from '../../util/Images';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { AppStore } from '../../stores/AppStore';
+import RadioButton from 'react-native-radio-button'
+
+
 /**
- * @class PayMe
+ * @class PayMeSubmit
  * @extends React.Component
  */
-export class PayMe extends React.Component {
+export class PayMeSubmit extends React.Component {
+
+    constructor(props) {
+        super();
+        this.state = {
+            beneficiaryNo: '',
+            amount: 0,
+            message: '',
+            whoPays: 1
+        };
+
+        if (props.data) {
+            this.state.beneficiaryNo = props.data.beneficiaryNo
+        }
+    }
+
+    onTransfer() {
+        let users = {
+        }
+    }
 
     /**
      * @render
@@ -48,14 +50,16 @@ export class PayMe extends React.Component {
                     <Text style={styles.approveHeadingStyle}>PAY - ME</Text>
                     <View style={styles.listviewContainer}>
                         <View style={styles.textInputDetailContainer}>
-                            <TextInput placeholder="Amount Request"
-                                onChangeText={text => this.setState({ amount: text })}
-                                style={styles.textInputContainer}></TextInput>
+                            <TextInput placeholder="Benificiery number"
+                                value={this.state.beneficiaryNo}
+                                style={styles.textInputContainer}>
+                            </TextInput>
                         </View>
                         <View style={styles.textInputDetailContainer}>
-                            <TextInput placeholder="Message"
-                                onChangeText={text => this.setState({ message: text })}
-                                style={styles.textInputContainer}></TextInput>
+                            <TextInput placeholder="Amount" style={styles.textInputContainer}></TextInput>
+                        </View>
+                        <View style={styles.textInputDetailContainer}>
+                            <TextInput placeholder="Message" style={styles.textInputContainer}></TextInput>
                         </View>
                         <WhoPays />
                     </View>
@@ -103,44 +107,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         height: 80,
         flex: 1,
-        alignItems: 'center',
         width: 280,
-    },
-    iconStyle: {
-        marginRight: 10
-    },
-    approveButtonContainer: {
-        width: 250,
-        height: 45,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 35,
-        marginLeft: 65,
-        shadowColor: 'black',
-        shadowOpacity: .6,
-        shadowOffset: {
-            width: .5,
-            height: .5,
-        },
-    },
-    qrCodeButtonStyle: {
-        color: '#FFF',
-        fontSize: 18,
-        fontWeight: 'bold'
-    },
-    detailContainer: {
-        height: 40,
-        alignItems: 'center',
-        flexDirection: 'row'
-    },
-    detailTextStyle: {
-        flex: 1,
-        marginLeft: 10,
-        color: '#5a5a5a'
-    },
-    textInputDetailContainer: {
-        marginTop: 10,
-        flexDirection: 'row'
     },
     textInputContainer: {
         height: 35,
@@ -150,4 +117,38 @@ const styles = StyleSheet.create({
         fontSize: 15,
         flex: 1
     },
+    approveButtonContainer: {
+        width: 250,
+        height: 45,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 35,
+        marginLeft: 60,
+        shadowColor: 'black',
+        shadowOpacity: .6,
+        shadowOffset: {
+            width: .5,
+            height: .5,
+        },
+    },
+    radioButtonCt: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10
+    },
+    qrCodeButtonStyle: {
+        color: '#FFF',
+        fontSize: 18,
+        fontWeight: 'bold'
+    },
+    textInputDetailContainer: {
+        marginTop: 10,
+        flexDirection: 'row'
+    },
+    whoPaysTextTyle: {
+        marginTop: 20,
+        flexDirection: 'row',
+        textAlign: 'center'
+    }
 });
