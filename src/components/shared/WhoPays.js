@@ -51,7 +51,7 @@ export class WhoPays extends React.Component {
                                 animation={'bounceIn'}
                                 isSelected={this.state.whoPays == 3}
                                 onPress={() => this.setState({ whoPays: 3 })} />
-                            <Text>Share 50/50</Text>
+                            <Text style={{ paddingLeft: 5 }}>Share 50/50</Text>
                         </View>
                     </View>
                 </View>
@@ -62,19 +62,15 @@ export class WhoPays extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
+        alignItems: 'stretch',
         flexDirection: 'column',
-        justifyContent: 'center',
         marginTop: 20
     },
     contentContainer: {
         backgroundColor: 'white',
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'stretch',
         marginTop: 20,
-        marginLeft: 30,
-        marginRight: 30,
     },
     whoPaysTextTyle: {
         marginTop: 20,

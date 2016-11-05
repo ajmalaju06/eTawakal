@@ -9,7 +9,7 @@ import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
 import { PayMe } from './PayMe';
 import { PayMeFarAway } from './PayMeFarAway';
-
+import { OnHoldRequest } from './OnHoldRequest';
 /**
  * @class PayMeHome
  * @extends React.Component
@@ -19,9 +19,15 @@ export class PayMeHome extends React.Component {
     onPayMe() {
         this.props.navigator.push({ component: PayMe });
     }
+
     onPayMeFarAway() {
         this.props.navigator.push({ component: PayMeFarAway });
     }
+
+    onHoldRequest() {
+        this.props.navigator.push({ component: OnHoldRequest });
+    }
+
 
     /**
      * @render
@@ -56,7 +62,7 @@ export class PayMeHome extends React.Component {
                                 <Text style={styles.tileText}>Report</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.tile} >
+                        <TouchableOpacity style={styles.tile} onPress={this.onHoldRequest.bind(this)}>
                             <View style={styles.tileInnerCt}>
                                 <Image style={styles.menuIcon} source={Images.ic_mobile_money} />
                                 <Text style={styles.tileText}>On Hold Request</Text>

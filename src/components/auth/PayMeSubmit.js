@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         height: 80,
         flex: 1,
-        width: 280,
+        width: 280
     },
     textInputContainer: {
         height: 35,

@@ -32,7 +32,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
  * @class PayMe
  * @extends React.Component
  */
-export class PayMe extends React.Component {
+export class PayMerchant extends React.Component {
 
     /**
      * @render
@@ -45,10 +45,15 @@ export class PayMe extends React.Component {
                 <CreditInfo />
                 <View style={styles.contentContainer}>
                     <View style={styles.lineStyle}></View>
-                    <Text style={styles.approveHeadingStyle}>PAY - ME</Text>
+                    <Text style={styles.approveHeadingStyle}>PAY MERCHANT</Text>
                     <View style={styles.listviewContainer}>
                         <View style={styles.textInputDetailContainer}>
-                            <TextInput placeholder="Amount Request"
+                            <TextInput placeholder="Phone Number"
+                                onChangeText={text => this.setState({ amount: text })}
+                                style={styles.textInputContainer}></TextInput>
+                        </View>
+                        <View style={styles.textInputDetailContainer}>
+                            <TextInput placeholder="Amount"
                                 onChangeText={text => this.setState({ amount: text })}
                                 style={styles.textInputContainer}></TextInput>
                         </View>
@@ -57,14 +62,33 @@ export class PayMe extends React.Component {
                                 onChangeText={text => this.setState({ message: text })}
                                 style={styles.textInputContainer}></TextInput>
                         </View>
-                        <WhoPays />
+                        <View>
+                            <TouchableOpacity>
+                                <View style={styles.approveButtonContainer} backgroundColor={'#22ab3b'}>
+                                    <Text style={styles.qrCodeButtonStyle}>SEND</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
-                <TouchableOpacity>
-                    <View style={styles.approveButtonContainer} backgroundColor={'#22ab3b'}>
-                        <Text style={styles.qrCodeButtonStyle}>ASK</Text>
+                <View style={{
+                    marginTop: 20,
+                    marginLeft: 40,
+                    marginRight: 50,
+                    alignItems: 'stretch'
+                }}>
+                    <View style={{ marginBottom: 3, alignItems: 'center', borderBottomWidth: .3, borderBottomColor: '#000' }}>
+                        <Text>OR</Text>
                     </View>
-                </TouchableOpacity>
+                    <View style={{ alignItems: 'center', padding: 3 }}>
+                        <Text style={{ color: '#999' }}>Scan QR code</Text>
+                    </View>
+                    <TouchableOpacity>
+                        <View style={[styles.approveButtonContainer, { marginTop: 10 }]} backgroundColor={'blue'}>
+                            <Text style={styles.qrCodeButtonStyle}>SCAN QR CODE</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </Image >
         );
     }
@@ -110,12 +134,11 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     approveButtonContainer: {
-        width: 250,
         height: 45,
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop: 30,
         marginBottom: 35,
-        marginLeft: 65,
         shadowColor: 'black',
         shadowOpacity: .6,
         shadowOffset: {

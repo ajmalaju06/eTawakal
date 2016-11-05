@@ -35,6 +35,8 @@ import { MobileMoney } from './MobileMoney';
 import { FindMerchant } from './MobileMoney';
 import { TransferHistory } from './TransferHistory';
 import { PayMeHome } from './PayMeHome';
+import { PayMerchant } from './PayMerchant';
+
 /**
  * @class HomeNew
  * @extends React.Component
@@ -62,6 +64,10 @@ export class HomeNew extends React.Component {
     onMobileMoney() {
         this.props.navigator.push({ component: MobileMoney });
     }
+
+    onPayMerchant() {
+        this.props.navigator.push({ component: PayMerchant });
+    }
     /**
      * @render
      * @return {View} view
@@ -87,10 +93,10 @@ export class HomeNew extends React.Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.menuContainer}>
-                        <TouchableOpacity style={styles.tile} onPress={this.onPayment.bind(this)}>
+                        <TouchableOpacity style={styles.tile} onPress={this.onPayMerchant.bind(this)}>
                             <View style={styles.tileInnerCt}>
                                 <Image style={styles.menuIcon} source={Images.ic_payment} />
-                                <Text style={styles.tileText}> Payment</Text>
+                                <Text style={styles.tileText}> Pay Merchant</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.tile} onPress={this.onApprove.bind(this)}>

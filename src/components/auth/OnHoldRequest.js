@@ -20,29 +20,45 @@
  * @author Ajmal<ajmalaju06@gmail.com>
  */
 
-
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView, Image } from 'react-native';
+import { View, Text, StyleSheet, ListView, Image, TouchableOpacity } from 'react-native';
 import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
 import { Images } from '../../util/Images';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Transfer } from './Transfer'
+import faker from 'faker';
 
 /**
- * @class SendFund
+ * @class TansferHistory
  * @extends React.Component
  */
-export class SendFund extends React.Component {
-
+export class OnHoldRequest extends React.Component {
 
     constructor() {
         super();
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        let data = [];
+        for (var i = 0; i < 10; i++) {
+            data.push({
+                name: faker.name.firstName(),
+                city: faker.address.city(),
+                phone: faker.phone.phoneNumber(),
+                beneficiaryNo: faker.finance.account()
+            })
+        }
         this.state = {
-            dataSource: ds.cloneWithRows(['row 1', 'row 2', 'row 3', 'row 4', '6', '7', '8', '9', '10'
-                , 'row 1', 'row 2', 'row 3', 'row 4', '6', '7', '8', '9', '10', 'sdf', 'sdfsfdf', 'sdfsdf']),
+            dataSource: ds.cloneWithRows(data)
         };
+    }
+
+    onPress(data) {
+        this.props.navigator.push({
+            component: Transfer, props: {
+                data: data
+            }
+        })
     }
 
     /**
@@ -51,21 +67,26 @@ export class SendFund extends React.Component {
      */
     renderRow(rowData, index) {
         let component = (
-            <View key={index} style={styles.listviewContainer}>
-                <View style={{ height: 40, }}>
-                    <Text style={styles.listviewTextStyle}>USER NAME</Text>
-                    <Text style={styles.listviewTextStyle} marginTop={5}>+91745649487   </Text>
+            <TouchableOpacity onPress={() => this.onPress(rowData)}>
+                <View key={index} style={styles.listviewContainer}>
+                    <View style={{ height: 40, }}>
+                        <Text style={styles.listviewTextStyle}>{rowData.name}</Text>
+                        <Text style={styles.listviewTextStyle}>{rowData.phone}</Text>
+                    </View>
                 </View>
-            </View >
+            </TouchableOpacity>
         );
         return component;
     }
 
+    onTransferAdd() {
+        this.props.navigator.push({ component: Transfer });
+    }
 
     /**
-     * @render
-     * @return {View} view
-     */
+    * @render
+    * @return { View } view
+    */
     render() {
         return (
             <Image style={styles.container} source={Images.background_pattern}>
@@ -73,20 +94,14 @@ export class SendFund extends React.Component {
                 <CreditInfo />
                 <View style={styles.contentContainer}>
                     <View style={styles.lineStyle}></View>
-                    <Text style={styles.approveHeadingStyle}>SEND FUND</Text>
+                    <Text style={styles.approveHeadingStyle}>ON HOLD REQUEST</Text>
                     <View style={{ flex: 1 }}>
                         <ListView
                             dataSource={this.state.dataSource}
-                            renderRow={this.renderRow.bind(this)}
-                            />
+                            renderRow={this.renderRow.bind(this)} />
                     </View>
                 </View>
-                <View style={styles.registerContainer}>
-                    <View style={styles.iconContainer}>
-                        <Icon name="plus" color="#FFF" size={20} />
-                    </View>
-                </View>
-            </Image>
+            </Image >
         );
     }
 }
@@ -94,7 +109,6 @@ export class SendFund extends React.Component {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'stretch',
-        backgroundColor: '#F5FCFF',
         flex: 1,
         width: null,
         height: null
@@ -125,13 +139,13 @@ const styles = StyleSheet.create({
         marginTop: 10,
         height: 45,
         flex: 1,
-        borderBottomColor: '#5a5a5a',
+        borderBottomColor: 'gray',
         borderBottomWidth: 0.5,
         width: 280,
     },
     registerContainer:
     {
-        height: 40,
+        height: 100,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center'
@@ -142,13 +156,13 @@ const styles = StyleSheet.create({
         marginRight: 5
     },
     iconContainer: {
-        width: 60,
-        height: 60,
+        width: 50,
+        height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         elevation: 10,
         marginRight: 20,
-        marginBottom: 40,
+        marginBottom: 20,
         backgroundColor: '#073D96',
         borderRadius: 30,
         shadowColor: 'black',
