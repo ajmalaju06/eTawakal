@@ -23,8 +23,8 @@
 'use strict';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Header } from '../shared/Header';
-import { Images } from '../../util/Images';
+import { Header } from './shared/Header';
+import { Images } from '.././util/Images';
 import { Registration } from './Registration';
 
 /**

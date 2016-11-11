@@ -29,9 +29,9 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { Header } from '../shared/Header';
-import { Images } from '../../util/Images';
-import { AppStore } from '../../stores/AppStore';
+import { Header } from './shared/Header';
+import { Images } from '.././util/Images';
+import { AppStore } from '.././stores/AppStore';
 import { Registration } from './Registration';
 import { HomeNew } from './HomeNew';
 import { RegisterInfo } from './RegisterInfo';

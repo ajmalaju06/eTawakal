@@ -33,29 +33,29 @@ import { AppStore } from '../stores/AppStore';
 import { NavigationStore } from '../stores/NavigationStore';
 
 import { Header } from './shared/Header';
-import { Login } from './auth/Login';
-import { RegisterInfo } from './auth/RegisterInfo';
-import { Registration } from './auth/Registration';
-import { Home } from './auth/Home'
+import { Login } from './Login';
+import { RegisterInfo } from './RegisterInfo';
+import { Registration } from './Registration';
+import { Home } from './Home'
 import { CreditInfo } from './shared/CreditInfo';
 import { WhoPays } from './shared/WhoPays';
-import { ApproveConfirm } from './auth/ApproveConfirm';
-import { Approve } from './auth/Approve';
-import { Marchant } from './auth/Marchant';
-import { MobileMoneyDetail } from './auth/MobileMoneyDetail';
-import { MobileMoney } from './auth/MobileMoney';
-import { NearByConfirm } from './auth/NearByConfirm';
-import { NearBy } from './auth/NearBy';
-import { PayMe } from './auth/PayMe';
-import { PaymentConfirm } from './auth/PaymentConfirm';
-import { Payment } from './auth/Payment';
-import { SendFundDetail } from './auth/SendFundDetail';
-import { SendFund } from './auth/SendFund';
-import { TransferConfirm } from './auth/TransferConfirm';
-import { Transfer } from './auth/Transfer';
-import { TransferSuccessfull } from './auth/TransferSuccessfull';
-import { HomeNew } from './auth/HomeNew';
-import { NewDeviceFound } from './auth/NewDeviceFound';
+import { ApproveConfirm } from './ApproveConfirm';
+import { Approve } from './Approve';
+import { Marchant } from './Marchant';
+import { MobileMoneyDetail } from './MobileMoneyDetail';
+import { MobileMoney } from './MobileMoney';
+import { NearByConfirm } from './NearByConfirm';
+import { NearBy } from './NearBy';
+import { PayMe } from './PayMe';
+import { PaymentConfirm } from './PaymentConfirm';
+import { Payment } from './Payment';
+import { SendFundDetail } from './SendFundDetail';
+import { SendFund } from './SendFund';
+import { TransferConfirm } from './TransferConfirm';
+import { Transfer } from './Transfer';
+import { TransferSuccessfull } from './TransferSuccessfull';
+import { HomeNew } from './HomeNew';
+import { NewDeviceFound } from './NewDeviceFound';
 
 
 var _initialRoute = null;
