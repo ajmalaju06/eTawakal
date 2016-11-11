@@ -52,7 +52,7 @@ export class PayMeFarAway extends React.Component {
             <TouchableOpacity onPress={() => this.onPress(rowData)}>
                 <View key={index} style={styles.listviewContainer}>
                     <View style={{ height: 55, }}>
-                        <Text style={styles.listviewTextStyle} fontWeight={"bold"}>{rowData.name}</Text>
+                        <Text style={[styles.listviewTextStyle, styles.usernameStyle]} >{rowData.name}</Text>
                         <Text style={styles.listviewTextStyle}>{rowData.city}</Text>
                         <Text style={styles.listviewTextStyle}>{rowData.phone}</Text>
                     </View>
@@ -151,5 +151,8 @@ const styles = StyleSheet.create({
         elevation: 10,
         backgroundColor: '#073D96',
         borderRadius: 20
+    },
+    usernameStyle: {
+        fontWeight: 'bold'
     }
 });

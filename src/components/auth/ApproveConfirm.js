@@ -33,6 +33,22 @@ import { Images } from '../../util/Images';
  */
 export class ApproveConfirm extends React.Component {
 
+
+    constructor(props) {
+        super();
+        this.state = {
+            name: '',
+            phone: '',
+            amount: 0,
+            message: '',
+            whoPays: 1
+        };
+
+        if (props.data) {
+            this.state.name = props.data.name,
+                this.state.phone = props.data.phone
+        }
+    }
     /**
      * @render
      * @return {View} view
@@ -40,17 +56,14 @@ export class ApproveConfirm extends React.Component {
     render() {
         return (
             <Image style={styles.container} source={Images.background_pattern}>
-                <Header />
+                <Header isHomePage={false} navigator={this.props.navigator} />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
                     <View style={styles.lineStyle}></View>
                     <Text style={styles.approveHeadingStyle}>APPROVE</Text>
                     <View style={styles.listviewContainer}>
-                        <View style={styles.imageContainer}>
-                            <Image style={styles.imageStyle} source={Images.person}></Image>
-                        </View>
-                        <Text style={styles.usernameStyle}>USER NAME</Text>
-                        <Text style={styles.numberStyle}>+91 5454 54528565</Text>
+                        <Text style={styles.usernameStyle}>{this.state.name}</Text>
+                        <Text style={styles.numberStyle}>{this.state.phone}</Text>
                         <View style={styles.detailMainContainer}>
                             <View style={styles.detailContainer}>
                                 <Text style={styles.detailheadStyle}>Amount</Text>
@@ -84,7 +97,6 @@ const styles = StyleSheet.create({
         height: null
     },
     contentContainer: {
-        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -127,6 +139,7 @@ const styles = StyleSheet.create({
     usernameStyle: {
         color: '#5a5a5a',
         fontSize: 14,
+        fontWeight: 'bold',
         marginTop: 10
     },
     numberStyle: {
@@ -135,7 +148,6 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     detailMainContainer: {
-        marginTop: 10,
         width: 310
     },
     detailContainer: {
@@ -144,7 +156,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         flex: 1,
-        marginTop: 15
     },
     detailheadStyle: {
         color: '#5a5a5a',
@@ -164,12 +175,12 @@ const styles = StyleSheet.create({
         height: 45,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 30
-        // shadowColor: 'black',
-        // shadowOpacity: .6,
-        // shadowOffset: {
-        // width: .5,
-        // height: .5,
-        // },
+        marginBottom: 30,
+        shadowColor: 'black',
+        shadowOpacity: .6,
+        shadowOffset: {
+            width: .5,
+            height: .5,
+        },
     },
 });

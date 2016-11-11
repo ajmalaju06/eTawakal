@@ -20,12 +20,13 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Image, Picker,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image, Picker, TouchableOpacity } from 'react-native';
 import { Header } from '../shared/Header';
 import { Images } from '../../util/Images';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import { AppStore } from '../../stores/AppStore';
+import RadioButton from 'react-native-radio-button'
+import { Verification } from './Verification';
 
 const Item = Picker.Item;
 
@@ -56,7 +57,7 @@ export class Registration extends React.Component {
         if (this.state.user.userName == '') valid = false;
         if (this.state.user.password == '') valid = false;
         if (this.state.user.phoneNumber == '') valid = false;
-        if (this.state.user.confirmPassWord == '') valid  = false;
+        if (this.state.user.confirmPassWord == '') valid = false;
         if (this.state.user.captcha == '') valid = false;
         if (valid) {
             this.setState({ isSubmitting: true })
@@ -88,6 +89,9 @@ export class Registration extends React.Component {
             }
         });
     }
+    onRegister() {
+        this.props.navigator.push({ component: Verification });
+    }
 
     renderCountryList() {
         return (
@@ -113,7 +117,7 @@ export class Registration extends React.Component {
             );
         }
         return (
-            <TouchableOpacity onpress={this.onRegisterUser.bind(this)}>
+            <TouchableOpacity onpress={this.onRegister.bind(this)}>
                 <View style={styles.continueButtonContainer} >
                     <Text style={styles.buttonStyle}>
                         Submit
@@ -130,34 +134,60 @@ export class Registration extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
-                <Header />
+            <Image style={styles.container} style={styles.container} source={Images.background_pattern}>
+                <Header isHomePage={false} navigator={this.props.navigator} />
                 <View style={{ marginTop: 10, flex: 1 }}>
                     <TextInput placeholder="Place" style={styles.textInputContainer} marginTop={10}></TextInput>
                     <View style={styles.phoneNumberContainer}>
                         <TextInput placeholder="971" style={styles.contryCodeTextInput}></TextInput>
                         <TextInput placeholder="Phone number"
-                            onChangeText={text => this.onChangeUser(text, 'phoneNumber')} 
+                            onChangeText={text => this.onChangeUser(text, 'phoneNumber')}
                             style={styles.phoneNumberTextInput}></TextInput>
                     </View>
                     <TextInput placeholder="User Name"
                         onChangeText={text => this.onChangeUser(text, 'userName')}
                         style={styles.textInputContainer} marginTop={10}></TextInput>
-                    <TextInput placeholder="Password" 
-                        onChangeText={text => this.onChangeUser(text,'passWord')} 
+                    <TextInput placeholder="Password"
+                        onChangeText={text => this.onChangeUser(text, 'passWord')}
                         style={styles.textInputContainer} marginTop={10}></TextInput>
                     <TextInput placeholder="Confirm password"
-                        onChangeText={text => this.onChangeUser(text,'confirmPassWord')}
-                        style={styles.textInputContainer} marginTop={10}></TextInput>
+                        onChangeText={text => this.onChangeUser(text, 'confirmPassWord')}
+                        style={styles.textInputContainer} marginTop={10}>
+                    </TextInput>
+                    <View style={{ marginTop: 10, marginLeft: 20, alignItems: 'flex-start', flexDirection: 'row' }}>
+                        <View style={styles.radioButtonCt}>
+                            <RadioButton
+                                animation={'bounceIn'}
+                                isSelected={this.state.whoPays == 1}
+                                onPress={() => this.setState({ whoPays: 1 })} />
+                            <Text style={styles.radioButtonTextStyle}> USER</Text>
+                        </View>
+                        <View style={styles.radioButtonCt} marginLeft={30}>
+                            <RadioButton
+                                animation={'bounceIn'}
+                                isSelected={this.state.whoPays == 2}
+                                onPress={() => this.setState({ whoPays: 2 })}
+                                />
+                            <Text style={styles.radioButtonTextStyle}> MERCHANT</Text>
+                        </View>
+                    </View>
                     <View style={styles.captchaContainer}>
                         <Image style={styles.captchaImageStyle} source={Images.captcha}></Image>
-                        <Icon style={{ marginLeft: 15 }} name="refresh" color="#000" size={19} />
+                        <TouchableOpacity>
+                            <Icon style={{ marginLeft: 15 }} name="refresh" color="#000" size={19} />
+                        </TouchableOpacity>
                     </View>
                     <TextInput placeholder="Captcha code"
-                        onChangeText={text => this.onChangeUser(text,'captcha')} style={styles.captchaCodeTextInputStyle}></TextInput>
+                        onChangeText={text => this.onChangeUser(text, 'captcha')} style={styles.captchaCodeTextInputStyle}></TextInput>
                 </View>
-                {this.renderSubmitBtn()}
-            </View>
+                <TouchableOpacity onPress={this.onRegister.bind(this)}>
+                    <View style={styles.continueButtonContainer} >
+                        <Text style={styles.buttonStyle}>
+                            Submit
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+            </Image >
         );
     }
 }
@@ -166,12 +196,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'stretch',
+        width: null,
+        height: null,
         backgroundColor: '#F5FCFF',
     },
     textInputContainer: {
         height: 40,
         borderColor: '#ECECEC',
         borderWidth: 1,
+        backgroundColor: 'white',
         marginLeft: 20,
         marginRight: 20,
         paddingLeft: 10,
@@ -188,6 +221,7 @@ const styles = StyleSheet.create({
         width: 50,
         borderColor: '#ECECEC',
         borderWidth: 1,
+        backgroundColor: 'white',
         paddingLeft: 10
     },
     phoneNumberTextInput: {
@@ -195,22 +229,23 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         borderColor: '#ECECEC',
         borderWidth: 1,
+        backgroundColor: 'white',
         paddingLeft: 10
     },
     continueButtonContainer: {
-        width: 250,
         height: 35,
         backgroundColor: '#e44c0d',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 30,
-        marginLeft: 65,
+        marginLeft: 20,
+        marginRight: 20,
         marginBottom: 20,
         shadowColor: 'black',
-        shadowOpacity: 1.0,
+        shadowOpacity: 0.5,
         shadowOffset: {
-            width: 1,
-            height: 1,
+            width: 0.5,
+            height: 0.5,
         },
     },
     captchaContainer: {
@@ -230,6 +265,7 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: '#ECECEC',
         borderWidth: 1,
+        backgroundColor: 'white',
         paddingLeft: 10,
         marginLeft: 20,
         marginRight: 20,
@@ -239,5 +275,14 @@ const styles = StyleSheet.create({
     buttonStyle: {
         color: '#FFF',
         fontWeight: 'bold'
+    },
+    radioButtonCt: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10
+    },
+    radioButtonTextStyle: {
+        backgroundColor: 'transparent'
     }
 });

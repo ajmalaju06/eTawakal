@@ -23,10 +23,12 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView, Image } from 'react-native';
+import { View, Text, StyleSheet, ListView, Image, TouchableOpacity } from 'react-native';
 import { Header } from '../shared/Header';
 import { CreditInfo } from '../shared/CreditInfo';
 import { Images } from '../../util/Images';
+import { ApproveConfirm } from './ApproveConfirm';
+import faker from 'faker';
 
 /**
  * @class Approve
@@ -34,14 +36,29 @@ import { Images } from '../../util/Images';
  */
 export class Approve extends React.Component {
 
-
     constructor() {
         super();
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        let data = [];
+        for (var i = 0; i < 10; i++) {
+            data.push({
+                name: faker.name.firstName(),
+                city: faker.address.city(),
+                phone: faker.phone.phoneNumber(),
+                amount: faker.finance.amount(),
+                beneficiaryNo: faker.finance.account()
+            })
+        }
         this.state = {
-            dataSource: ds.cloneWithRows(['row 1', 'row 2', 'row 3', 'row 4', '6', '7', '8', '9', '10'
-                , 'row 1', 'row 2', 'row 3', 'row 4', '6', '7', '8', '9', '10', 'sdf', 'sdfsfdf', 'sdfsdf']),
+            dataSource: ds.cloneWithRows(data)
         };
+    }
+    onPress(data) {
+        this.props.navigator.push({
+            component: ApproveConfirm, props: {
+                data: data
+            }
+        })
     }
 
     /**
@@ -50,10 +67,28 @@ export class Approve extends React.Component {
      */
     renderRow(rowData, index) {
         let component = (
-            <View key={index} style={styles.listviewConainer}>
-                <Text style={styles.listviewUsernameTextStyle}>USER NAME</Text>
-                <Text style={styles.listviewUsernameTextStyle} marginTop={10}>+91878754866</Text>
-            </View>
+            <TouchableOpacity onPress={() => this.onPress(rowData)}>
+                <View key={index} style={styles.listviewContainer}>
+                    <View style={{ height: 55, }}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={[styles.listviewTextStyle, styles.usernameStyle]}>Name - </Text>
+                            <Text style={[styles.listviewTextStyle, styles.usernameStyle]}>{rowData.name}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                            <Text style={styles.listviewTextStyle}>Amount -</Text>
+                            <Text style={styles.listviewTextStyle}>{rowData.amount}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={styles.listviewTextStyle}>Mobile - </Text>
+                            <Text style={styles.listviewTextStyle}>{rowData.phone}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={styles.listviewTextStyle}>Date - </Text>
+                            <Text style={styles.listviewTextStyle}>05/11/2016</Text>
+                        </View>
+                    </View>
+                </View>
+            </TouchableOpacity>
         );
         return component;
     }
@@ -65,7 +100,7 @@ export class Approve extends React.Component {
     render() {
         return (
             <Image style={styles.container} source={Images.background_pattern}>
-                <Header />
+                <Header isHomePage={false} navigator={this.props.navigator} />
                 <CreditInfo />
                 <View style={styles.contentContainer}>
                     <View style={styles.lineStyle}></View>
@@ -121,29 +156,32 @@ const styles = StyleSheet.create({
         height: 45,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 35
-        // shadowColor: 'black',
-        // shadowOpacity: .6,
-        // shadowOffset: {
-        // width: .5,
-        // height: .5,
-        // },
+        marginBottom: 35,
+        marginTop: 5,
+        shadowColor: 'black',
+        shadowOpacity: .6,
+        shadowOffset: {
+            width: .5,
+            height: .5,
+        },
     },
     qrCodeButtonStyle: {
         color: '#FFF',
         fontSize: 18,
         fontWeight: 'bold'
     },
-    listviewConainer: {
+    listviewContainer: {
         marginTop: 10,
-        height: 50,
+        height: 84,
         flex: 1,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 0.5,
         width: 280,
-        borderBottomColor: '#d7d7d7',
-        borderBottomWidth: 1
     },
-    listviewUsernameTextStyle: {
-        color: '#555555',
-        fontSize: 14
+    listviewTextStyle: {
+        color: '#5a5a5a',
+    },
+    usernameStyle: {
+        fontWeight: 'bold'
     }
 });

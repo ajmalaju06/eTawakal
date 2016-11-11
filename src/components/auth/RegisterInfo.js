@@ -22,9 +22,10 @@
 
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Header } from '../shared/Header';
 import { Images } from '../../util/Images';
+import { Registration } from './Registration';
 
 /**
  * @class Register
@@ -32,14 +33,18 @@ import { Images } from '../../util/Images';
  */
 export class RegisterInfo extends React.Component {
 
+    onRegister() {
+        this.props.navigator.push({ component: Registration });
+    }
+
     /**
      * @render
      * @return {View} view
      */
     render() {
         return (
-            <View style={styles.container}>
-                <Header />
+            <Image style={styles.container} style={styles.container} source={Images.background_pattern}>
+                <Header isHomePage={false} navigator={this.props.navigator} />
                 <Text style={styles.textlabelStyle}>User Registration Steps</Text>
                 <View style={styles.instructionContainer}>
                     <View style={styles.instructionContentContrainer}>
@@ -81,13 +86,15 @@ export class RegisterInfo extends React.Component {
                         </View>
                     </View>
                 </View>
-                <View style={styles.continueButtonContainer}>
-                    <Text style={{ color: '#FFF', fontWeight: 'bold' }}>
-                        Continue
+                <TouchableOpacity onPress={this.onRegister.bind(this)}>
+                    <View style={styles.continueButtonContainer}>
+                        <Text style={{ color: '#FFF', fontWeight: 'bold' }}>
+                            Continue
                     </Text>
-                </View>
+                    </View>
+                </TouchableOpacity>
 
-            </View>
+            </Image>
         );
     }
 }
@@ -95,6 +102,8 @@ export class RegisterInfo extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: null,
+        height: null,
         alignItems: 'stretch',
         backgroundColor: '#F5FCFF',
     },
@@ -103,6 +112,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
         fontWeight: 'bold',
         color: '#808080',
+        backgroundColor: 'transparent',
         fontSize: 14
     },
     instructionContainer: {
@@ -113,14 +123,15 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         marginRight: 10,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     boxContainer: {
         height: 70,
-        width: 400,
+        flex: 1,
         borderColor: 'gray',
         borderWidth: .5,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: 'white'
     },
     boxTextStyle: {
         fontSize: 12,
@@ -130,7 +141,7 @@ const styles = StyleSheet.create({
     },
     continueButtonContainer: {
         width: 250,
-        height: 35,
+        height: 40,
         backgroundColor: '#e44c0d',
         justifyContent: 'center',
         alignItems: 'center',

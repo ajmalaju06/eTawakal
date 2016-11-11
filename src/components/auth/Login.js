@@ -34,6 +34,8 @@ import { Images } from '../../util/Images';
 import { AppStore } from '../../stores/AppStore';
 import { Registration } from './Registration';
 import { HomeNew } from './HomeNew';
+import { RegisterInfo } from './RegisterInfo';
+import { ForgotPassword } from './ForgotPassword'
 /**
  * @class Login
  * @extends React.Component
@@ -53,7 +55,10 @@ export class Login extends React.Component {
     }
 
     onRegister() {
-        this.props.navigator.push({ component: HomeNew });
+        this.props.navigator.push({ component: RegisterInfo });
+    }
+    onForgot() {
+        this.props.navigator.push({ component: ForgotPassword });
 
     }
 
@@ -92,7 +97,7 @@ export class Login extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} style={styles.container} source={Images.background_pattern}>
                 <Header isLoginPage={true} />
                 <View style={styles.loginContainer}>
                     <TextInput placeholder="Username"
@@ -104,7 +109,9 @@ export class Login extends React.Component {
                         value={this.state.password}
                         style={styles.textInputContainer} marginTop={25}></TextInput>
                     {this.renderLoginButton()}
-                    <Text style={styles.forgotPasswordTextStyle}>Forgot password ?</Text>
+                    <TouchableOpacity onPress={this.onForgot.bind(this)}>
+                        <Text style={styles.forgotPasswordTextStyle}>Forgot password ?</Text>
+                    </TouchableOpacity>
                 </View>
                 <TouchableOpacity onPress={this.onRegister.bind(this)}>
                     <View style={styles.registerContainer}>
@@ -116,7 +123,7 @@ export class Login extends React.Component {
                         </View>
                     </View>
                 </TouchableOpacity>
-            </View>
+            </Image>
         );
     }
 }
@@ -124,8 +131,9 @@ export class Login extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: null,
+        height: null,
         alignItems: 'stretch',
-        backgroundColor: '#F5FCFF',
     },
     welcome: {
         backgroundColor: '#E7E4E6',
@@ -146,6 +154,7 @@ const styles = StyleSheet.create({
     },
     textInputContainer: {
         height: 40,
+        backgroundColor: 'white',
         borderColor: '#ECECEC',
         borderWidth: 1,
         marginLeft: 20,

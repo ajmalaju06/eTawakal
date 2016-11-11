@@ -84,7 +84,7 @@ export class PayMerchant extends React.Component {
                         <Text style={{ color: '#999' }}>Scan QR code</Text>
                     </View>
                     <TouchableOpacity>
-                        <View style={[styles.approveButtonContainer, { marginTop: 10 }]} backgroundColor={'blue'}>
+                        <View style={[styles.approveButtonContainer, { marginTop: 10 }]} backgroundColor={'#0054a5'}>
                             <Text style={styles.qrCodeButtonStyle}>SCAN QR CODE</Text>
                         </View>
                     </TouchableOpacity>
@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
         height: null
     },
     contentContainer: {
-        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -167,6 +166,7 @@ const styles = StyleSheet.create({
     },
     textInputContainer: {
         height: 35,
+        backgroundColor: 'white',
         borderColor: '#ECECEC',
         borderWidth: 1,
         paddingLeft: 10,
