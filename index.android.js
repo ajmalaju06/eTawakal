@@ -22,7 +22,7 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, TextInput, View, TouchableHighlight } from 'react-native';
-import { Application } from './src/components/Application';
+import { Application } from './src/Application';
 /**
  * @class eTawakal 
  * @extends React.Component

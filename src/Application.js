@@ -22,45 +22,25 @@
 
 
 'use strict';
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
-    StyleSheet, Text, TextInput, View, Navigator,
-    DrawerLayoutAndroid, TouchableHighlight
+    StyleSheet, Text, TextInput, Dimensions,
+    View, Navigator, DrawerLayoutAndroid, TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import DrawerLayout from 'react-native-drawer-layout';
 
-import { AppStore } from '../stores/AppStore';
-import { NavigationStore } from '../stores/NavigationStore';
+import { AppStore } from './stores/AppStore';
+import { NavigationStore } from './stores/NavigationStore';
+import { Header } from './components/Header';
+import { Login } from './components/Login';
+import { DrawerContent } from './components/DrawerContent';
 
-import { Header } from './shared/Header';
-import { Login } from './Login';
-import { RegisterInfo } from './RegisterInfo';
-import { Registration } from './Registration';
-import { Home } from './Home'
-import { CreditInfo } from './shared/CreditInfo';
-import { WhoPays } from './shared/WhoPays';
-import { ApproveConfirm } from './ApproveConfirm';
-import { Approve } from './Approve';
-import { Marchant } from './Marchant';
-import { MobileMoneyDetail } from './MobileMoneyDetail';
-import { MobileMoney } from './MobileMoney';
-import { NearByConfirm } from './NearByConfirm';
-import { NearBy } from './NearBy';
-import { PayMe } from './PayMe';
-import { PaymentConfirm } from './PaymentConfirm';
-import { Payment } from './Payment';
-import { SendFundDetail } from './SendFundDetail';
-import { SendFund } from './SendFund';
-import { TransferConfirm } from './TransferConfirm';
-import { Transfer } from './Transfer';
-import { TransferSuccessfull } from './TransferSuccessfull';
-import { HomeNew } from './HomeNew';
-import { NewDeviceFound } from './NewDeviceFound';
 
 
 var _initialRoute = null;
 var _navigator = null;
-
+var _windowHeight = Dimensions.get('window').height;
 /**
  * @class Application 
  * @extends React.Component
@@ -78,9 +58,11 @@ export class Application extends React.Component {
     };
 
     componentDidMount() {
-        AppStore.partnerLogin().then(response => {
-            console.warn('partner logged in');
-        });
+        AppStore.partnerLogin().then(response => { });
+    }
+
+    getChildContext() {
+        return { drawer: this.drawer };
     }
 
     /**
@@ -99,11 +81,28 @@ export class Application extends React.Component {
          * render the application with the current navigator component
          */
         let screenView = (
-            <View style={styles.container}>
-                <Component {...route.props} navigator={navigator} />
-            </View>
+            <DrawerLayout ref={ref => this.drawer = ref}
+                drawerWidth={300}
+                content={<DrawerContent />}
+                renderNavigationView={this.renderDrawerNavigationView.bind(this)}
+                tapToClose={true}>
+                <View style={styles.container}>
+                    <Component {...route.props} navigator={navigator} drawer={this.drawer} />
+                </View>
+            </DrawerLayout>
         );
+
         return screenView;
+    }
+
+    renderDrawerNavigationView() {
+        return (
+            <DrawerContent
+                style={{ backgroundColor: '#FFF', height: _windowHeight }}
+                language={this.state.language}
+                resourceKeys={this.state.resourceKeys}
+                navigator={_navigator} />
+        );
     }
 
     /**
@@ -119,8 +118,9 @@ export class Application extends React.Component {
 
 }
 
-
-
+Application.childContextTypes = {
+    drawer: PropTypes.object
+};
 
 const styles = StyleSheet.create({
     container: {

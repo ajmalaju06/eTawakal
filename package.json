@@ -13,9 +13,12 @@
     "react-motion": "^0.4.5",
     "react-native": "0.35.0",
     "react-native-device-info": "^0.9.6",
+    "react-native-drawer": "^2.3.0",
+    "react-native-drawer-layout": "^1.1.0",
     "react-native-dropdown": "0.0.6",
     "react-native-progress": "^3.1.0",
     "react-native-radio-button": "^1.0.2",
+    "react-native-scrollable-tab-view": "^0.6.0",
     "react-native-simple-radio-button": "^2.4.0",
     "react-native-slide-down-panel": "^1.0.6",
     "react-native-vector-icons": "^2.1.0"

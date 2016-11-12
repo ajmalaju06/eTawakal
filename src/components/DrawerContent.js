@@ -20,24 +20,51 @@
  * @author Ajmal<ajmalaju06@gmail.com>
  */
 
+'use strict';
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, TextInput, View, TouchableHighlight } from 'react-native';
-import { Application } from './src/Application';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+
+import { AppStore } from '../stores/AppStore';
+import { Header } from './Header';
+import { CreditInfo } from './CreditInfo';
+import { Images } from '../util/Images';
+import { NormalReport } from './NormalReport';
+
 /**
- * @class eTawakal 
+ * @class HomeNew
  * @extends React.Component
  */
-export default class eTawakal extends Component {
+export class DrawerContent extends React.Component {
 
-	/**
-	 * Renders the application into the view 
-	 * @return {View} view
-	 */
-	render() {
-		return (
-			<Application />
-		);
-	}
+    constructor() {
+        super();
+    }
+
+    /**
+     * @render
+     * @return {View} view
+     */
+    render() {
+        return (
+            <View style={[styles.container, this.props.style]}>
+                <View style={styles.profileCt}>
+
+                </View>
+            </View>
+        );
+    }
 }
 
-AppRegistry.registerComponent('eTawakal', () => eTawakal);
+const styles = StyleSheet.create({
+    container: {
+        alignItems: 'stretch',
+        backgroundColor: '#F5FCFF',
+        flex: 1,
+        width: null,
+        height: null
+    },
+    profileCt: {
+        height: 140,
+        backgroundColor: 'green'
+    }
+});

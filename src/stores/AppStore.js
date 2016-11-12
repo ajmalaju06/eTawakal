@@ -37,10 +37,10 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
     transactionCode: '',
 
     deviceCode: '7uTOEBSz3pFGrEz6vsgiE6Odt6PbooWs',
-
     userName: 'N67a2TEuY68gnqZfuayeVg==',
-
     password: 't1h6/ATZ26WqXugQ+DJs4g==',
+
+    userInfo: {},
 
     partnerLogin: function () {
         let param = {
@@ -202,19 +202,24 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
     mobileUserAppLogin: function (user) {
         let mobileuserapplogin = {
             ServiceUsersBE: {
-                UserName: user.userName,
-                Password: user.password,
-                DeviceCode: this.deviceCode,
-                TransactionCode: this.transactionCode
+                UserName: 'N67a2TEuY68gnqZfuayeVg==',
+                Password: 't1h6/ATZ26WqXugQ+DJs4g==',
+                DeviceCode: '7uTOEBSz3pFGrEz6vsgiE6Odt6PbooWs',
+                TransactionCode: '/HHMlXNd4hPxyxVMz57EdQbuOgADQq5nqR2D71MUD0cjSFTIZXNXecufIKB9QkcR'
             },
             MobileUsersBE: {
                 UserName: user.username,
-                Mobile: user.mobile,
-                DeviceCode: this.deviceCode,
+                Password: user.password,
+                GCMCellId: 'SsZwtIURZrc7lntaaqeVM7+9SCaUo7J0s3eztsNGDM6L7lyjfcVySBsaA/LBUDCJiYq1izS+kI3z\nh/sF9yODKlJ3fZrfqF2OBCDstIDn/c+a4H0xkM+aPVgAHb3smR1zSlY30sQ+Zgm5WGOe0DzjHK45\nDVb6//JBYf4XpngitMTqa53mIlnX5z0uiqLb7WCJRXOpaywx2Z8ftRw/2SwPHg==',
+                DeviceCode: '7uTOEBSz3pFGrEz6vsgiE6Odt6PbooWs'
             }
         };
         return RequestManager
-            .post('userServices.svc/MobileUserAppLogin', mobileuserapplogin);
+            .post('userServices.svc/MobileUserAppLogin', mobileuserapplogin).then(response => {
+                this.userinfo = response.MobileUsersBE;
+                console.warn(JSON.stringify(response))
+                return response;
+            });
     },
 
     normalTransferRequest: function (user) {

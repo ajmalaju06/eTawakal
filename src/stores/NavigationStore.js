@@ -29,33 +29,7 @@ import { EventEmitter } from 'eventemitter3';
  * @singleton
  */
 export var NavigationStore = Object.assign({}, EventEmitter.prototype, {
-
-    currentComponent: null,
-
-    previousComponent: null,
-
-    navigator: null,
-
-    push: function (component, props) {
-        if (this.navigator != null) {
-            this.navigator.push({
-                component: component,
-                props: props
-            });
-        }
-    },
-
-
-    pop: function () {
-        if (this.navigator != null) {
-            this.navigator.pop();
-        }
-    },
-
-    setNavigator: function (_navigator) {
-        if (this.navigator == null) {
-            this.navigator = _navigator;
-        }
+    openDrawer() {
+        this.emit('draweropen');
     }
-
 });
